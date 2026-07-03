@@ -37,6 +37,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { useEffect } from "react"
 import { cn } from "@/lib/utils"
+import Header from "./header"
 
 // Navigation items for patient
 const navItems = [
@@ -104,17 +105,7 @@ setOpenMobile(true)
   return (
     <Sidebar collapsible="icon" className="border-r">
       {/* Header with App Name */}
-      <SidebarHeader className="border-b px-4 py-4">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
-            <Stethoscope className="h-4 w-4" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-lg font-semibold tracking-tight">MediBook</span>
-            <span className="text-xs text-muted-foreground">Patient Portal</span>
-          </div>
-        </div>
-      </SidebarHeader>
+      <Header/>
 
       {/* Main Content */}
       <SidebarContent>
