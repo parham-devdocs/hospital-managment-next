@@ -3,7 +3,7 @@ import { Roboto, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "./shares/components/sidebar";
+import Sidebar from "./shares/components/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
@@ -32,7 +32,7 @@ export default function RootLayout({
       <body>
         <TooltipProvider>
         <SidebarProvider>
-      <AppSidebar />
+      <Sidebar />
       <main>
         <SidebarTrigger />
         {children}

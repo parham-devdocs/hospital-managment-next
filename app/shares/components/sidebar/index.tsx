@@ -15,15 +15,12 @@ import {
 } from "@/components/ui/sidebar"
 import {
   CalendarDays,
-  Clock,
   Home,
   LogOut,
   Plus,
   Settings,
   Stethoscope,
   User,
-  FileText,
-  Bell,
   Heart,
 } from "lucide-react"
 import Link from "next/link"
@@ -85,7 +82,7 @@ const quickActions = [
   }
 ]
 
-export function AppSidebar() {
+export default function AppSidebar() {
   const pathname = usePathname()
   const {  setOpenMobile,open} = useSidebar()
 
