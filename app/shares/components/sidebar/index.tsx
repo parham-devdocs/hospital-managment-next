@@ -38,6 +38,9 @@ import { Badge } from "@/components/ui/badge"
 import { useEffect } from "react"
 import { cn } from "@/lib/utils"
 import Header from "./header"
+import SidebarMenuItemComp from "./sidebarMenuItem"
+import Event from "./event"
+import Footer from "./footer"
 
 // Navigation items for patient
 const navItems = [
@@ -74,15 +77,20 @@ const navItems = [
   },
 ]
 
-// Quick actions
-const quickActions = [
+const events = [
   {
-    title: "Book Appointment",
-    icon: Plus,
-    url: "/book-appointment",
+    date: new Date(2026, 6, 3), // July 3, 2026
+    note: "Appointment with Dr. Sarah Johnson - Annual Checkup"
+  },
+  {
+    date: new Date(2026, 6, 3),
+    note: "Follow-up blood test results review"
+  },
+  {
+    date: new Date(2026, 6, 3),
+    note: "Physical therapy session at 2:30 PM"
   }
 ]
-
 export default function AppSidebar() {
   const pathname = usePathname()
   const {  setOpenMobile,open} = useSidebar()
@@ -105,7 +113,7 @@ setOpenMobile(true)
   return (
     <Sidebar collapsible="icon" className="border-r">
       {/* Header with App Name */}
-      <Header/>
+      <Header open={open}/>
 
       {/* Main Content */}
       <SidebarContent>
@@ -118,134 +126,17 @@ setOpenMobile(true)
   <SidebarMenu className="space-y-1">
   {navItems.map((item) => {
   const isActive = pathname === item.url || pathname.startsWith(item.url + "/");
-
-  return (
-    <SidebarMenuItem key={item.title}>
-      <SidebarMenuButton
-        asChild
-        isActive={isActive}
-        tooltip={item.title}
-        className={isActive ? "bg-sidebar-primary text-white hover:bg-sidebar-primary hover:text-white" : ""}
-      >
-        <Link href={item.url} onClick={handleNavigation} className="flex w-full items-center gap-3">
-          <item.icon />
-          <span className="truncate">{item.title}</span>
-          {item.badge && (
-            <Badge className={isActive ? "bg-white/20 text-white" : ""}>
-              {item.badge}
-            </Badge>
-          )}
-        </Link>
-      </SidebarMenuButton>
-    </SidebarMenuItem>
-  );
+  return <SidebarMenuItemComp isActive={isActive} title={item.title} url={item.url} key={item.title} Icon={item.icon} handleNavigation={handleNavigation} badge={item.badge} />
 })}
 </SidebarMenu>
 </SidebarGroup>
 
-        {/* Quick Actions */}
-        <SidebarGroup>
-          <SidebarGroupLabel>Quick Actions</SidebarGroupLabel>
-          <SidebarMenu>
-            {quickActions.map((action) => (
-              <SidebarMenuItem key={action.title}>
-                <SidebarMenuButton asChild>
-                  <Link href={action.url} onClick={handleNavigation}>
-                    <action.icon className="h-4 w-4" />
-                    <span>{action.title}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
-
         {/* Today's Date */}
-        <SidebarGroup className={open? "flex":"hidden"}>
-          <SidebarGroupLabel>Today</SidebarGroupLabel>
-          <SidebarMenu>
-            <SidebarMenuItem >
-              <div className="px-3 py-2 text-sm">
-                <div className="font-medium">{new Date().toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}</div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  You have 2 appointments today
-                </div>
-              </div>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+       <Event open={open} events={events}/>
       </SidebarContent>
 
       {/* Footer with User Profile */}
-      <SidebarFooter className="border-t">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton
-                  size="lg"
-                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                >
-                  <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg bg-blue-100 text-blue-600">
-                      {user.initials}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">{user.name}</span>
-                    <span className="truncate text-xs text-muted-foreground">{user.role}</span>
-                  </div>
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                side="bottom"
-                align="end"
-                sideOffset={4}
-              >
-                <DropdownMenuLabel className="p-0 font-normal">
-                  <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                    <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage src={user.avatar} alt={user.name} />
-                      <AvatarFallback className="rounded-lg bg-blue-100 text-blue-600">
-                        {user.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">{user.name}</span>
-                      <span className="truncate text-xs text-muted-foreground">{user.email}</span>
-                    </div>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/profile">
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/settings">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Settings
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
+      <Footer name={user.name} avatar={user.avatar} email={user.email} role={user.role} fallback={user.initials}/>
 
       <SidebarRail />
     </Sidebar>
