@@ -3,80 +3,30 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar"
 import {
   CalendarDays,
   Home,
-  LogOut,
-  Plus,
   Settings,
   Stethoscope,
   User,
   Heart,
 } from "lucide-react"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Badge } from "@/components/ui/badge"
-import { useEffect } from "react"
-import { cn } from "@/lib/utils"
+
 import Header from "./header"
 import SidebarMenuItemComp from "./sidebarMenuItem"
 import Event from "./event"
 import Footer from "./footer"
+import { getNavItemsByRole } from "./navItems"
 
 // Navigation items for patient
-const navItems = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: Home,
-  },
-  {
-    title: "Find Doctors",
-    url: "/doctors",
-    icon: Stethoscope,
-  },
-  {
-    title: "My Appointments",
-    url: "/appointments",
-    icon: CalendarDays,
-    badge: "3",
-  },
-  {
-    title: "Prescriptions",
-    url: "/prescriptions",
-    icon: Heart,
-  },
-  {
-    title: "Profile",
-    url: "/profile",
-    icon: User,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
-  },
-]
-
+const navItems=getNavItemsByRole("patient")
 const events = [
   {
     date: new Date(2026, 6, 3), // July 3, 2026
