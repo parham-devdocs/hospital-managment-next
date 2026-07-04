@@ -5,14 +5,9 @@ import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui
 import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group'
 import React from 'react'
 import { Control, Controller, FieldValue, FieldValues, Path } from 'react-hook-form'
-interface MyComponentProps<T extends FieldValues> {
-  control: Control<T>; 
-  fieldName:Path<T>
-  fieldLabel:string
-  props?:any
+import { TextAreaProps } from './types'
 
-}
-const TextArea = <T extends FieldValues>({control,fieldLabel,fieldName}:MyComponentProps<T>) => {
+const TextArea = <T extends FieldValues>({control,fieldLabel,fieldName}:TextAreaProps<T>) => {
   return (
     <Controller
     name={fieldName}

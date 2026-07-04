@@ -4,17 +4,9 @@ import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { HTMLInputAutoCompleteAttribute } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
-interface MyComponentProps<T extends FieldValues> {
-    control: Control<T>; 
-    fieldName:Path<T>
-    fieldLabel:string
-    placeHolder?:string
-    autoComplete?:HTMLInputAutoCompleteAttribute;
-    inputType?: React.HTMLInputTypeAttribute
-    props?:any
+import { GeneralInputType } from './types';
 
-  }
-  const ControllerComp = <T extends FieldValues>({control,inputType="text",fieldName,fieldLabel,placeHolder,...props}:MyComponentProps<T>) => {
+  const ControllerComp = <T extends FieldValues>({control,inputType="text",fieldName,fieldLabel,placeHolder,...props}:GeneralInputType<T>) => {
   return (
 <Controller
               name={fieldName}

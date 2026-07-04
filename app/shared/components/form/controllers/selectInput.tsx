@@ -1,5 +1,5 @@
 import React from 'react'
-import { Control, Controller, FieldValues, Path } from 'react-hook-form'
+import {  Controller, FieldValues} from 'react-hook-form'
 import {
     Select,
     SelectContent,
@@ -8,23 +8,8 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
+import { FormSelectProps } from './types'
 
-// Generic option type
-interface SelectOption {
-    value: string;
-    label: string;
-    disabled?: boolean;
-}
-
-interface FormSelectProps<T extends FieldValues> {
-    control: Control<T>;
-    name: Path<T>;
-    label?: string;
-    placeholder?: string;
-    options: SelectOption[];
-    className?: string;
-    onValueChange?: (value: string) => void;
-}
 
 const FormSelect = <T extends FieldValues>({
     control,

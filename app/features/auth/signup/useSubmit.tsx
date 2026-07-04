@@ -40,7 +40,9 @@ export const useRegistration = () => {
       if (error) {
         toast.error("Registration failed:", {
           description: error.message,
-          position: "bottom-right",
+          position: "top-right",
+          duration:30,
+          richColors:true
         });
         return;
       }
