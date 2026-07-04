@@ -2,16 +2,19 @@
 
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-interface MyComponentProps {
-    control: Control<FieldValues>; 
-    fieldName:string
+import { HTMLInputAutoCompleteAttribute } from 'react';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form'
+interface MyComponentProps<T extends FieldValues> {
+    control: Control<T>; 
+    fieldName:Path<T>
     fieldLabel:string
-    placeHolder:string
-    autoComplete:string
+    placeHolder?:string
+    autoComplete?:HTMLInputAutoCompleteAttribute;
+    inputType?: React.HTMLInputTypeAttribute
+    props?:any
 
   }
-  const Controllers = ({control,fieldName,fieldLabel,placeHolder,autoComplete}:MyComponentProps) => {
+  const ControllerComp = <T extends FieldValues>({control,inputType="text",fieldName,fieldLabel,placeHolder,...props}:MyComponentProps<T>) => {
   return (
 <Controller
               name={fieldName}
@@ -26,11 +29,21 @@ interface MyComponentProps {
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="fullName"
+                    {...props}
+                    id={fieldName}
+                    type={inputType}
                     aria-invalid={fieldState.invalid}
                     placeholder={placeHolder}
-                    autoComplete={autoComplete}
                     className="border-primary/20 focus-visible:ring-primary/30 h-11"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      // ✅ Convert to number if input type is number
+                      if (inputType === 'number') {
+                        field.onChange(value === '' ? '' : Number(value));
+                      } else {
+                        field.onChange(value);
+                      }
+                    }}
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} className="text-xs mt-1" />
@@ -40,4 +53,4 @@ interface MyComponentProps {
             />  )
 }
 
-export default Controllers
+export default ControllerComp

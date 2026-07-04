@@ -3,16 +3,17 @@ import { Roboto, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import Sidebar from "./shares/components/sidebar";
+import Sidebar from "./shared/components/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "sonner";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
   display: "swap",
-})
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,20 +28,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full ",roboto.variable, "font-sans", inter.variable)}
+      className={cn("h-full ", roboto.variable, "font-sans", inter.variable)}
     >
-      <body >
+      <body>
         <TooltipProvider>
-        <SidebarProvider>
-      <Sidebar />
-      <main className=" w-full">
-        {children}
-      </main>
-    </SidebarProvider>
+          <SidebarProvider>
+            <Sidebar />
+            <main className=" w-full">{children}</main>
+          </SidebarProvider>
         </TooltipProvider>
-     
+        <Toaster />
       </body>
-     
     </html>
   );
 }
