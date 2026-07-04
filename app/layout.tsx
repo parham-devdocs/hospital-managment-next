@@ -27,14 +27,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full",roboto.variable, "font-sans", inter.variable)}
+      className={cn("h-full ",roboto.variable, "font-sans", inter.variable)}
     >
-      <body>
+      <body >
         <TooltipProvider>
         <SidebarProvider>
       <Sidebar />
-      <main>
-        <SidebarTrigger />
+      <main className=" w-full">
         {children}
       </main>
     </SidebarProvider>
