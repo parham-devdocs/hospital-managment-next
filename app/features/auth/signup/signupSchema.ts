@@ -1,6 +1,6 @@
 import z from "zod";
 
-const formSchema = z
+const signUpSchema = z
   .object({
     fullName: z
       .string()
@@ -38,4 +38,4 @@ const formSchema = z
     }
   });
 
-  export default formSchema
+  export default signUpSchema
