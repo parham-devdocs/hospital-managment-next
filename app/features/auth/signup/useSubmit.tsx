@@ -24,7 +24,10 @@ export const useRegistration = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const { data: authData, error } = await createClient().auth.signUp({
+      const supabase = createClient();
+      
+      // 1. Sign up the user
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
         options: {
@@ -33,35 +36,72 @@ export const useRegistration = () => {
             age: data.age,
             gender: data.gender,
             address: data.address,
-            role:"patient"
+            role: "patient"
           },
         },
       });
 
-      if (error) {
+      if (signUpError) {
         toast.error("Registration failed:", {
-          description: error.message,
+          description: signUpError.message,
           position: "top-right",
-          duration:30,
-          richColors:true
+          duration: 5000,
         });
         return;
       }
 
+      if (!authData.user) {
+        toast.error("Registration failed:", {
+          description: "No user data returned",
+          position: "top-right",
+          duration: 5000,
+        });
+        return;
+      }
+
+      // 2. Insert into profiles table using the user's ID
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: authData.user.id, // ✅ IMPORTANT: Link to auth.users
+          first_name: data.fullName, // ✅ Match your column names
+          last_name: '', // or split fullName
+          email: data.email,
+          phone: '', // Add phone field to your form if needed
+          avatar_url: null,
+          // Add any other fields your profiles table has
+        })
+        .select()
+        .single();
+
+      if (profileError) {
+        console.error('Profile insertion error:', profileError);
+        toast.error("Profile creation failed:", {
+          description: profileError.message,
+          position: "top-right",
+          duration: 5000,
+        });
+        
+        // Optional: Delete the auth user if profile creation fails
+        // await supabase.auth.admin.deleteUser(authData.user.id);
+        return;
+      }
+
+      // 3. Success!
       toast.success("Registration successful!", {
-        description: (
-          <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-            <code>{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
+        description: `Welcome ${data.fullName}! Please check your email to verify your account.`,
         position: "bottom-right",
+        duration: 5000,
       });
 
       form.reset();
+
     } catch (error) {
+      console.error('Registration error:', error);
       toast.error("An error occurred:", {
-        description: "Please try again later.",
+        description: error instanceof Error ? error.message : "Please try again later.",
         position: "bottom-right",
+        duration: 5000,
       });
     }
   };
