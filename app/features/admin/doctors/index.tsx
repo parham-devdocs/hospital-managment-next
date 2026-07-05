@@ -1,9 +1,13 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { getDoctors } from './services';
 import { Badge } from '@/components/ui/badge'; // Optional: if you have a Badge component
+import TableHeaderComp from '@/app/shared/components/table/tableHeader';
+import { columns } from './data';
+import TableCellComp from '@/app/shared/components/table/tableCell';
+import AvatarTableCell from '@/app/shared/components/table/avatarTableCell';
 
 const DoctorsPage = async () => {
-  const { data: doctors, error } = await getDoctors(0,2);
+  const { data: doctors, error } = await getDoctors(0,10);
 
   if (!doctors && !error) {
     return (
@@ -30,68 +34,26 @@ const DoctorsPage = async () => {
   if (doctors && doctors.length > 0) {
     return (
       <div className="w-full h-full p-6">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-primary">Doctors</h1>
-          <p className="text-sm text-muted-foreground">
-            {doctors.length} {doctors.length === 1 ? 'doctor' : 'doctors'} available
-          </p>
-        </div>
+    
 
         <div className="rounded-lg border">
           <Table>
-            <TableCaption>List of all doctors</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[50px]">#</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Specialty</TableHead>
-                <TableHead>Phone</TableHead>
-                <TableHead>Address</TableHead>
-                <TableHead>Age</TableHead>
-                <TableHead>Gender</TableHead>
-                <TableHead>Experience</TableHead>
-                <TableHead>Joined</TableHead>
-              </TableRow>
-            </TableHeader>
+           <TableHeaderComp columns={columns}/>
             <TableBody>
               {doctors.map((doctor, index) => (
                 <TableRow key={doctor.id}>
-                  <TableCell className="font-medium">{index + 1}</TableCell>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        {doctor.profiles.fullName?.charAt(0) || 'D'}
-                      </div>
-                      {doctor.profiles.fullName || 'N/A'}
-                    </div>
-                  </TableCell>
-                  <TableCell>{doctor.profiles.email || 'N/A'}</TableCell>
-                  <TableCell>
-                    <span className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-700">
-                      {doctor.specialty?.specialty || 'Not specified'}
-                    </span>
-                  </TableCell>
-                  <TableCell>{doctor.profiles.phone || 'N/A'}</TableCell>
-                  <TableCell className="max-w-[150px] truncate">
-                    {doctor.profiles.address || 'N/A'}
-                  </TableCell>
-                  <TableCell>{doctor.profiles.age || 'N/A'}</TableCell>
-                  <TableCell>
-                    <span className="capitalize">
-                      {doctor.profiles.gender || 'N/A'}
-                    </span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-700">
-                      {doctor.years_experience || 0} years
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-xs">
-                    {doctor.created_at 
-                      ? new Date(doctor.created_at).toLocaleDateString() 
-                      : 'N/A'}
-                  </TableCell>
+                  <TableCellComp  type="number">{index+1}</TableCellComp>
+                  <AvatarTableCell  fallbackText={doctor.profiles.fullName} imageUrl={doctor.profiles.avatar_url}/>
+                  <TableCellComp type="string">{doctor.profiles.fullName}</TableCellComp>
+        <TableCellComp type="string">{doctor.profiles.email}</TableCellComp>
+        <TableCellComp type="string" badge>{doctor.specialty.specialty}</TableCellComp>
+        <TableCellComp type="string">{doctor.profiles.phone}</TableCellComp>
+        <TableCellComp type="string">{doctor.profiles.address}</TableCellComp>
+        <TableCellComp type="number">{doctor.profiles.age}</TableCellComp>
+        <TableCellComp type="string">{doctor.profiles.gender}</TableCellComp>
+        <TableCellComp type="number" badge>{doctor.years_experience}</TableCellComp>
+        <TableCellComp type="date">{doctor.profiles.created_at}</TableCellComp>
+
                 </TableRow>
               ))}
             </TableBody>

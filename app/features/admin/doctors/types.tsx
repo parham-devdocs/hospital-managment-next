@@ -26,3 +26,9 @@ export interface Profile {
     profiles: Profile;
     specialty:Specialty
   }
+  export interface Column {
+    key: string;
+    label: string;
+    className?: string;
+}
+
