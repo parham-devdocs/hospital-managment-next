@@ -23,7 +23,7 @@ export const useLogin = () => {
       const { data: authData, error } = await createClient().auth.signInWithPassword({
         email: data.email,
         password: data.password
-      });
+      })
 
       if (error) {
         toast.error("Login failed:", {

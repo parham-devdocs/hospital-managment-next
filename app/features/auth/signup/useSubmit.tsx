@@ -33,6 +33,7 @@ export const useRegistration = () => {
             age: data.age,
             gender: data.gender,
             address: data.address,
+            role:"patient"
           },
         },
       });

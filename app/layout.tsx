@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Roboto, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import Sidebar from "./shared/components/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
