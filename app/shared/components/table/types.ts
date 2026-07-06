@@ -22,7 +22,7 @@ export interface TableColumn {
     onSort?: (key: string) => void;
   }
   
- export interface TableHeaderCompProps {
+  export interface TableHeaderCompProps {
     columns: TableColumn[];
     className?: string;
   }

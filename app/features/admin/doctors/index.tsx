@@ -1,35 +1,12 @@
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { getDoctors } from './services';
-import { Badge } from '@/components/ui/badge'; // Optional: if you have a Badge component
+import { Table, TableBody,  TableRow } from '@/components/ui/table';
 import TableHeaderComp from '@/app/shared/components/table/tableHeader';
 import { columns } from './data';
 import TableCellComp from '@/app/shared/components/table/tableCell';
 import AvatarTableCell from '@/app/shared/components/table/avatarTableCell';
+import { Doctor } from './types';
+const DoctorsPage = async ({doctors}:{doctors:Doctor[]}) => {
 
-const DoctorsPage = async () => {
-  const { data: doctors, error } = await getDoctors(0,10);
 
-  if (!doctors && !error) {
-    return (
-      <div className="flex h-full w-full items-center justify-center p-8">
-        <div className="text-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto" />
-          <p className="mt-2 text-sm text-muted-foreground">Loading doctors...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex h-full w-full items-center justify-center p-8">
-        <div className="text-center text-red-500">
-          <p className="font-semibold">Error loading doctors</p>
-          <p className="text-sm">{error.message}</p>
-        </div>
-      </div>
-    );
-  }
 
   if (doctors && doctors.length > 0) {
     return (
