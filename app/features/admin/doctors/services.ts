@@ -3,7 +3,6 @@
 import { createClient } from "@/app/utils/supabase/client";
 import { Doctor } from "./types";
 import paginate from "@/app/shared/utils/paginate";
-
 export async function getDoctors(page: number) {
   const supabase = createClient();
   const itemsPerPage = 2;
@@ -61,4 +60,19 @@ export async function getDoctors(page: number) {
     count: totalItems,
     totalPages 
   };
+}
+
+export const deleteDoctor = async (id:string) => {
+  const supabase = createClient();
+
+    const { data, error } = await supabase
+    .from("doctor")
+    .delete().eq("id",id)
+    if (error) {
+      return {error}
+    }
+    if (data) {
+      return {data ,response:"doctor deleted successfully"}
+    }
+  
 }
