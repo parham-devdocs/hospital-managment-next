@@ -1,8 +1,8 @@
 import Header from "@/app/shared/components/header";
-import DoctorsTable from "../../../features/admin/doctors";
+import DoctorsTable from "../../features/admin/doctors";
 import { BriefcaseMedical } from "lucide-react";
 import { getDoctors } from "@/app/features/admin/doctors/services";
-import { PageProps } from "../../../shared/types";
+import { PageProps } from "../../shared/types";
 import PaginationComp from "@/app/shared/components/pagination/pagination";
 
 const page = async ({ searchParams }: PageProps) => {
