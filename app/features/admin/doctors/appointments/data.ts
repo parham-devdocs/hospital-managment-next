@@ -1,4 +1,4 @@
-import { Appointment } from "./types"
+import { Appointment } from "./types";
 
 export const appointments: Appointment[] = [
   // July 2, 2026 - 2 appointments
@@ -12,13 +12,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p1",
       name: "John Smith",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d1",
       name: "Dr. Sarah Johnson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "16",
@@ -30,15 +30,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p13",
       name: "Thomas Brown",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d1",
       name: "Dr. Sarah Johnson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 3, 2026 - 1 appointment
   {
     id: "2",
@@ -50,15 +50,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p2",
       name: "Emma Wilson",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d2",
       name: "Dr. Michael Chen",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 4, 2026 - 2 appointments
   {
     id: "3",
@@ -70,13 +70,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p3",
       name: "Robert Davis",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d3",
       name: "Dr. Emily Martinez",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "17",
@@ -88,15 +88,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p14",
       name: "Susan Clark",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d9",
       name: "Dr. Mark Taylor",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 5, 2026 - 1 appointment
   {
     id: "4",
@@ -108,15 +108,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p4",
       name: "Lisa Anderson",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d1",
       name: "Dr. Sarah Johnson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 6, 2026 - 1 appointment
   {
     id: "5",
@@ -128,15 +128,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p5",
       name: "David Brown",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d4",
       name: "Dr. Lisa Park",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 7, 2026 - 3 appointments
   {
     id: "6",
@@ -148,13 +148,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p6",
       name: "Olivia Taylor",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d5",
       name: "Dr. James Wilson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "18",
@@ -166,13 +166,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p15",
       name: "Karen White",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d6",
       name: "Dr. Robert Kim",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "19",
@@ -184,15 +184,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p16",
       name: "Daniel Lee",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d10",
       name: "Dr. Amanda Green",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 8, 2026 - 2 appointments
   {
     id: "7",
@@ -204,13 +204,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p7",
       name: "Maria Garcia",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d6",
       name: "Dr. Robert Kim",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "20",
@@ -222,15 +222,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p17",
       name: "Rachel Adams",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d7",
       name: "Dr. Angela White",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 9, 2026 - 1 appointment
   {
     id: "8",
@@ -242,15 +242,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p8",
       name: "James Rodriguez",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d7",
       name: "Dr. Angela White",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 10, 2026 - 3 appointments
   {
     id: "9",
@@ -262,13 +262,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p9",
       name: "Patricia Lee",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d8",
       name: "Dr. David Thompson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "21",
@@ -280,13 +280,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p18",
       name: "William Turner",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d11",
       name: "Dr. Rachel Carter",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "22",
@@ -298,15 +298,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p19",
       name: "Sophie Martin",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d12",
       name: "Dr. Thomas Walsh",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 11, 2026 - 1 appointment
   {
     id: "10",
@@ -318,15 +318,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p10",
       name: "Michael Johnson",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d3",
       name: "Dr. Emily Martinez",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 12, 2026 - 2 appointments
   {
     id: "11",
@@ -338,13 +338,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p7",
       name: "Maria Garcia",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d6",
       name: "Dr. Robert Kim",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "23",
@@ -356,15 +356,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p20",
       name: "George Williams",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d13",
       name: "Dr. Patricia Moore",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 14, 2026 - 1 appointment
   {
     id: "12",
@@ -376,15 +376,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p11",
       name: "Sarah Williams",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d1",
       name: "Dr. Sarah Johnson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 15, 2026 - 3 appointments
   {
     id: "13",
@@ -396,13 +396,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p3",
       name: "Robert Davis",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d3",
       name: "Dr. Emily Martinez",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "24",
@@ -414,13 +414,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p21",
       name: "Angela Miller",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d1",
       name: "Dr. Sarah Johnson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "25",
@@ -432,15 +432,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p22",
       name: "Jennifer Davis",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d14",
       name: "Dr. Robert Wilson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 16, 2026 - 1 appointment
   {
     id: "14",
@@ -452,15 +452,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p5",
       name: "David Brown",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d4",
       name: "Dr. Lisa Park",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 17, 2026 - 2 appointments
   {
     id: "15",
@@ -472,13 +472,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p12",
       name: "Noah Martinez",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d5",
       name: "Dr. James Wilson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "26",
@@ -490,15 +490,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p23",
       name: "Megan Roberts",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d15",
       name: "Dr. Steven Adams",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 18, 2026 - 2 appointments
   {
     id: "27",
@@ -510,13 +510,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p24",
       name: "Rachel Brown",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d16",
       name: "Dr. Elizabeth Scott",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "28",
@@ -528,15 +528,15 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p25",
       name: "Mary Wilson",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d17",
       name: "Dr. Charles Miller",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
-  
+
   // July 20, 2026 - 2 appointments
   {
     id: "29",
@@ -548,13 +548,13 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p26",
       name: "Steven Johnson",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d18",
       name: "Dr. Barbara Nelson",
-      avatar_url: ""
-    }
+      avatar_url: "",
+    },
   },
   {
     id: "30",
@@ -566,21 +566,21 @@ export const appointments: Appointment[] = [
     patient: {
       id: "p27",
       name: "Laura Taylor",
-      avatar_url: ""
+      avatar_url: "",
     },
     doctor: {
       id: "d19",
       name: "Dr. Daniel Harris",
-      avatar_url: ""
-    }
-  }
-]
+      avatar_url: "",
+    },
+  },
+];
 
 export const statusColorMap: Record<string, string> = {
   in_progress: "#3b82f6", // blue
-  completed: "#22c55e",   // green
-  cancelled: "#ef4444",   // red
-}
+  completed: "#22c55e", // green
+  cancelled: "#ef4444", // red
+};
 
 export const colorMap: string[] = [
   "#3b82f6",
@@ -589,7 +589,7 @@ export const colorMap: string[] = [
   "#f59e0b",
   "#8b5cf6",
   "#eab308",
-  "#ec4899"
-]
+  "#ec4899",
+];
 
-export const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+export const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

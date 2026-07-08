@@ -1,31 +1,40 @@
-"use client"
-import { format, isSameDay, isToday} from "date-fns"
-import { Card, CardContent } from "@/components/ui/card"
+"use client";
+import { format, isSameDay, isToday } from "date-fns";
+import { Card, CardContent } from "@/components/ui/card";
 
-import { cn } from "@/lib/utils"
-import PopoverComp from "./popover"
-import { appointments } from "./data"
-import WeekdaysHeader from "./weekdaysHeader"
-import CalendarHeader from "./calendarHeader"
-import { useCalendar } from "./hooks/useCalendar"
-import { getCalendarDays, getDayColor, getEventsForDay } from "./utils/calendarHelpers"
+import { cn } from "@/lib/utils";
+import { appointments } from "./data";
+import CalendarHeader from "./calendarHeader";
+import { useCalendar } from "./hooks/useCalendar";
+import {
+  getCalendarDays,
+  getDayColor,
+  getEventsForDay,
+} from "./utils/calendarHelpers";
+import WeekdaysHeader from "./weekdaysHeader";
 
 export default function CustomCalendar() {
-
-const {selectedDate,setSelectedDate,currentDate,goToNextMonth,goToPreviousMonth,goToToday}=useCalendar()
- const calendarDays=getCalendarDays(currentDate)
+  const {
+    selectedDate,
+    setSelectedDate,
+    currentDate,
+    goToNextMonth,
+    goToPreviousMonth,
+    goToToday,
+  } = useCalendar();
+  const calendarDays = getCalendarDays(currentDate);
 
   const renderDayCell = (day: Date | null, index: number) => {
     if (!day) {
-      return <div key={`empty-${index}`} className="aspect-square " />
+      return <div key={`empty-${index}`} className="aspect-square " />;
     }
 
-    const dayEvents = getEventsForDay(day,appointments)
-    const hasEvent = dayEvents.length > 0
-    const isSelected = selectedDate ? isSameDay(day, selectedDate) : false
-    const isToday_date = isToday(day)
-    const isWeekend = day.getDay() === 0 || day.getDay() === 6
-    const dayColor = getDayColor(day)
+    const dayEvents = getEventsForDay(day, appointments);
+    const hasEvent = dayEvents.length > 0;
+    const isSelected = selectedDate ? isSameDay(day, selectedDate) : false;
+    const isToday_date = isToday(day);
+    const isWeekend = day.getDay() === 0 || day.getDay() === 6;
+    const dayColor = getDayColor(day);
 
     return (
       <div key={day.toISOString()} className="relative aspect-square">
@@ -42,13 +51,15 @@ const {selectedDate,setSelectedDate,currentDate,goToNextMonth,goToPreviousMonth,
             !isSelected && "hover:bg-primary/10"
           )}
         >
-          <span className={cn(
-            "text-base font-semibold",
-            isSelected && "text-white"
-          )}>
+          <span
+            className={cn(
+              "text-base font-semibold",
+              isSelected && "text-white"
+            )}
+          >
             {format(day, "d")}
           </span>
-          
+
           {hasEvent && (
             <div className="flex gap-0.5 pointer-events-none">
               {dayEvents.slice(0, 3).map((event, i) => (
@@ -67,22 +78,19 @@ const {selectedDate,setSelectedDate,currentDate,goToNextMonth,goToPreviousMonth,
           )}
         </button>
 
-        {/* Events Popover - pass the day color */}
-        {hasEvent && (
-          <PopoverComp date={day} appointments={dayEvents} color={dayColor} />
-        )}
+     
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <Card className="mx-auto w-[700px] shadow-lg">
       <CardContent className="p-6">
         {/* Header */}
-        <CalendarHeader 
-          currentDate={currentDate} 
-          goToNextMonth={goToNextMonth} 
-          goToPreviousMonth={goToPreviousMonth} 
+        <CalendarHeader
+          currentDate={currentDate}
+          goToNextMonth={goToNextMonth}
+          goToPreviousMonth={goToPreviousMonth}
           goToToday={goToToday}
         />
 
@@ -95,5 +103,5 @@ const {selectedDate,setSelectedDate,currentDate,goToNextMonth,goToPreviousMonth,
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
