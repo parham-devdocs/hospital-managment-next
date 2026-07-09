@@ -11,6 +11,7 @@ import {
   getEventsForDay} from "./utils/calendarHelpers";
 import WeekdaysHeader from "./weekdaysHeader";
 import { useAppointments } from "./hooks/useAppointments";
+import PopoverComp from "./popover";
 
 export default function CustomCalendar() {
   const {
@@ -82,6 +83,7 @@ const {appointments,error}=useAppointments({doctorId:16,startDate,endDate})
             </div>
           )}
         </button>
+        <PopoverComp date={date} appointments={appointments} color={dayColor}/>
 
      
       </div>
@@ -106,6 +108,7 @@ const {appointments,error}=useAppointments({doctorId:16,startDate,endDate})
         <div className="grid grid-cols-7 gap-1">
           {calendarDays.map((day, index) => renderDayCell(day, index))}
         </div>
+
       </CardContent>
     </Card>
   );
