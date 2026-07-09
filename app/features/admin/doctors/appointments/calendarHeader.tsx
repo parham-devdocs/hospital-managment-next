@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React from "react";
 import { type CalendarHeader } from "./types";
 
 const CalendarHeader = ({

@@ -16,8 +16,13 @@ export interface Appointment {
     avatar_url?: string;
     specialty:{name:string}
   };
+  available_time:AvailableTime
 }
+export interface AvailableTime{
+  time:string
+  date:string
 
+}
 export interface PageProps{
   params: Promise < {
     slug: string[]

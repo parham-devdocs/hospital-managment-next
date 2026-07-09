@@ -7,7 +7,7 @@ import {
   format,
 } from "date-fns";
 import { colorMap } from "../data";
-import { Appointment } from "../types";
+import { Appointment } from "@/app/shared/types";
 
 const getDayColor = (date: Date) => {
   const dateKey = format(date, "yyyy-MM-dd");
@@ -21,10 +21,35 @@ const getDayColor = (date: Date) => {
 };
 
 const getEventsForDay = (date: Date, appointments: Appointment[]) => {
-  return appointments.filter(
-    (event) => format(event.date, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
-  );
-};
+  
+  // Format the target date to string for comparison
+  const targetDate = format(date, "yyyy-MM-dd")
+  
+  return appointments.filter((event) => {
+    // Handle different possible structures
+    let eventDate: Date | null = null
+
+    // If event has available_time object with date
+    if (event.available_time?.date) {
+      eventDate = new Date(event.available_time.date)
+    }
+    // If event has direct date property
+    else if (event.date) {
+      eventDate = new Date(event.date)
+    }
+    // If event has available_time as string
+    else if (typeof event.available_time.time === 'string') {
+      eventDate = new Date(event.available_time.date)
+    }
+
+    
+    
+    if (!eventDate) return false
+    
+    const eventDateStr = format(eventDate, "yyyy-MM-dd")
+    return eventDateStr === targetDate
+  })
+}
 
 export { getDayColor, getEventsForDay };
 export const getCalendarDays = (currentDate: Date) => {

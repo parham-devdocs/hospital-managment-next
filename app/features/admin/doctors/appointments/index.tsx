@@ -1,17 +1,16 @@
 "use client";
-import { format, isSameDay, isToday } from "date-fns";
+import { endOfMonth, format, isSameDay, isToday, startOfMonth } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { cn } from "@/lib/utils";
-import { appointments } from "./data";
 import CalendarHeader from "./calendarHeader";
 import { useCalendar } from "./hooks/useCalendar";
 import {
   getCalendarDays,
   getDayColor,
-  getEventsForDay,
-} from "./utils/calendarHelpers";
+  getEventsForDay} from "./utils/calendarHelpers";
 import WeekdaysHeader from "./weekdaysHeader";
+import { useAppointments } from "./hooks/useAppointments";
 
 export default function CustomCalendar() {
   const {
@@ -23,6 +22,12 @@ export default function CustomCalendar() {
     goToToday,
   } = useCalendar();
   const calendarDays = getCalendarDays(currentDate);
+
+const date = new Date('2026-07-09T09:15:50+0000')
+
+const startDate = startOfMonth(date).toDateString()   // 2026-07-01 00:00:00
+const endDate = endOfMonth(date).toDateString()  
+const {appointments,error}=useAppointments({doctorId:16,startDate,endDate})
 
   const renderDayCell = (day: Date | null, index: number) => {
     if (!day) {
@@ -84,7 +89,7 @@ export default function CustomCalendar() {
   };
 
   return (
-    <Card className="mx-auto w-[700px] shadow-lg">
+    <Card className="mx-auto w-full  shadow-lg">
       <CardContent className="p-6">
         {/* Header */}
         <CalendarHeader
