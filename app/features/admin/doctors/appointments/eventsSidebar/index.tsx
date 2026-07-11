@@ -27,11 +27,10 @@ console.log({appointments})
               key={appointment.id}
               id={appointment.id}
               title={appointment.title}
-              status={"cancelled"}
+              status={appointment.status}
               description={appointment.description}
               doctor={appointment.doctor}
               patient={appointment.patient}
-              color={'#3B82F6'}
               available_time={appointment.available_time}
             />
           ))
