@@ -1,6 +1,4 @@
-// app/admin/doctors/[slug]/appointment/@right/[date]/page.tsx
-import EventsSidebar from '@/app/features/admin/doctors/appointments/eventsSidebar';
-import { Suspense } from 'react';
+import EventsSidebar from "@/app/features/admin/doctors/appointments/eventsSidebar/components/EventSidebar";
 
 
 export default async function RightPanelWithDate({

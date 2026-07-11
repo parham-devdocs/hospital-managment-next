@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { CalendarNavigationProps } from "../types";
+import { CalendarNavigationProps } from "../../types";
 
 const CalendarHeader = ({
   goToToday,

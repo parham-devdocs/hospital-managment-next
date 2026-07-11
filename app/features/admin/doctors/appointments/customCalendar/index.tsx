@@ -1,20 +1,24 @@
 // CustomCalendar.tsx
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
-import DayCell from "./dayCell";
-import { useCalendar } from "../hooks/useCalendar";
-import { useAppointments } from "../hooks/useAppointments";
+import { useCalendar } from "./hooks/useCalendar";
+import { useAppointments } from "./hooks/useAppointments";
 import {
   getCalendarDays,
   getDayColor,
   getEventsForDay,
 } from "../utils/calendarHelpers";
 import { useMemo, useCallback } from "react";
-import { isSameDay, isToday, isWeekend } from "date-fns";
-import CalendarHeader from "./calendarHeader";
-import WeekdaysHeader from "./weekdaysHeader";
+import { format, isSameDay, isToday, isWeekend } from "date-fns";
+import CalendarHeader from "./components/calendarHeader";
+import WeekdaysHeader from "./components/weekdaysHeader";
+import DayCell from "./components/dayCell";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export default function CustomCalendar() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
   const {
     currentDate,
     goToNextMonth,
@@ -24,25 +28,41 @@ export default function CustomCalendar() {
     setSelectedDate,
   } = useCalendar();
 
+  // ✅ Handle date selection with URL update
+  const handleDateSelect =(day: Date) => {
+    if (!day) return;
+    
+    // Set selected date
+    setSelectedDate(day);
+    
+    // Format date for URL
+    const formattedDate = format(day, 'yyyy-MM-dd');
+    
+    // Update URL with date parameter
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('date', formattedDate);
+    
+    // Push to URL bar without page reload
+    router.push(`/admin/doctors/16/appointment?${params.toString()}`, { scroll: false })
+    
+    console.log('📅 Selected date:', formattedDate);
+
+  }
+
   // ✅ Memoize calendar days
   const { calendarDays } = useMemo(() => {
     return getCalendarDays(currentDate);
   }, [currentDate]);
 
-  // ✅ Hard-code to today's date for testing
-  const today = new Date();
-  const todayStr = today.toISOString().split("T")[0];
-
   const { appointments, error, loading } = useAppointments({
     doctorId: 16,
   });
-console.log(appointments)
-  const renderDayCell = useCallback(
-    (day: Date | null, index: number) => {
-      // Handle null days
+
+  const renderDayCell =(day: Date | null, index: number) => {
       if (!day) {
         return <div key={`empty-${index}`} className="aspect-square" />;
       }
+      
       const dayEvents = getEventsForDay(day, appointments);
       const dayColor = getDayColor(day);
       const isSelected = selectedDate ? isSameDay(day, selectedDate) : false;
@@ -58,12 +78,10 @@ console.log(appointments)
           isToday={isTodayDate}
           isWeekend={isWeekendFn}
           dayColor={dayColor}
-          onSelect={setSelectedDate}
+          onSelect={handleDateSelect} // ✅ Pass the handler properly
         />
       );
-    },
-    [appointments, selectedDate, setSelectedDate]
-  );
+  }
 
   if (loading) {
     return (

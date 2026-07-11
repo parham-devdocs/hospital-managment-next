@@ -1,6 +1,6 @@
-// app/admin/doctors/[slug]/appointment/@right/[date]/page.tsx
-import EventsSidebar from '@/app/features/admin/doctors/appointments/eventsSidebar';
-import { format } from 'date-fns';
+import EventsSidebar from "@/app/features/admin/doctors/appointments/eventsSidebar/components/EventSidebar";
+import { format } from "date-fns";
+
 
 export default async function RightPanelWithDate({
   params,
@@ -9,17 +9,14 @@ export default async function RightPanelWithDate({
 }) {
   const resolvedParams = await params;
   const doctorId = resolvedParams.slug;
-  
+
   // Get today's date
   const today = new Date();
-  const dateString = format(today, 'yyyy-MM-dd');
- 
+  const dateString = format(today, "yyyy-MM-dd");
 
   return (
     <div className="p-4">
-      <h3 className="text-lg font-semibold mb-4">
-        📋 appointments for today
-      </h3>
+      <h3 className="text-lg font-semibold mb-4">📋 appointments for today</h3>
       <EventsSidebar date={dateString} doctorId={+doctorId} />
     </div>
   );

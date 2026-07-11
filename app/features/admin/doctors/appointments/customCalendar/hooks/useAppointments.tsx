@@ -1,7 +1,7 @@
 // hooks/useAppointments.ts
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/app/utils/supabase/client";
-import { Appointment } from '../../types';
+import { Appointment } from "../../../types";
 
 type UseAppointmentsOptions = {
   doctorId: number;
@@ -14,7 +14,7 @@ type UseAppointmentsOptions = {
 
 export const useAppointments = ({
   doctorId,
-  status = 'in_progress',
+  status = "in_progress",
   date,
   startDate,
   endDate,
@@ -31,7 +31,7 @@ export const useAppointments = ({
   const fetchAppointments = useCallback(async () => {
     // Handle missing doctorId
     if (!doctorId) {
-      console.warn('⚠️ No doctorId provided');
+      console.warn("⚠️ No doctorId provided");
       setAppointments([]);
       setCount(0);
       setLoading(false);
@@ -43,11 +43,18 @@ export const useAppointments = ({
     setError(null);
 
     try {
-      console.log('🔵 Fetching appointments for:', { doctorId, status, date, startDate, endDate });
+      console.log("🔵 Fetching appointments for:", {
+        doctorId,
+        status,
+        date,
+        startDate,
+        endDate,
+      });
 
       let query = supabase
         .from("appointment")
-        .select(`
+        .select(
+          `
           *,
           available_time (*),
           doctor:doctor_id (
@@ -63,7 +70,9 @@ export const useAppointments = ({
               fullName
             )
           )
-        `, { count: 'exact' })
+        `,
+          { count: "exact" }
+        )
         .eq("doctor_id", doctorId);
 
       if (status) {
@@ -71,44 +80,43 @@ export const useAppointments = ({
       }
 
       if (date) {
-        console.log('📅 Filtering by date:', date);
+        console.log("📅 Filtering by date:", date);
         query = query.eq("available_time.date", date);
       }
 
       if (startDate && endDate) {
-        console.log('📅 Filtering by date range:', startDate, 'to', endDate);
+        console.log("📅 Filtering by date range:", startDate, "to", endDate);
         query = query
           .gte("available_time.date", startDate)
           .lte("available_time.date", endDate);
       }
 
       query = query
-        .order('date', { ascending: true, foreignTable: 'available_time' })
-        .order('time', { ascending: true, foreignTable: 'available_time' });
+        .order("date", { ascending: true, foreignTable: "available_time" })
+        .order("time", { ascending: true, foreignTable: "available_time" });
 
       const { data, error, count: totalCount } = await query;
-if (date && data && data[0].available_time===null) {
-  return null
-}
+      if (date && data && data[0].available_time === null) {
+        return null;
+      }
       if (error) {
         throw new Error(error.message);
       }
 
-      console.log('📊 Found appointments:', data?.length || 0);
-      
-      setAppointments(data as Appointment[] || []);
+      console.log("📊 Found appointments:", data?.length || 0);
+
+      setAppointments((data as Appointment[]) || []);
       setCount(totalCount || 0);
       setHasFetched(true);
-      
     } catch (err: any) {
-      console.error('❌ Error fetching appointments:', err);
-      setError(err.message || 'Failed to fetch appointments');
+      console.error("❌ Error fetching appointments:", err);
+      setError(err.message || "Failed to fetch appointments");
       setAppointments([]);
       setCount(0);
       setHasFetched(true);
     } finally {
       setLoading(false);
-      console.log('🔄 Loading set to false');
+      console.log("🔄 Loading set to false");
     }
   }, [doctorId, status, date, startDate, endDate]);
 

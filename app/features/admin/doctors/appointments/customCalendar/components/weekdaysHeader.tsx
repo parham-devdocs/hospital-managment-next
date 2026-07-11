@@ -1,4 +1,4 @@
-import { WEEKDAYS } from "../data";
+import { WEEKDAYS } from "../../data";
 
 const WeekdaysHeader = () => {
   return (

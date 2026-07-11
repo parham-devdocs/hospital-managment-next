@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { PopoverProps } from "../../types";
+import { PopoverProps } from "../../../types";
 
 const PopoverComp = ({ date, appointments, color }: PopoverProps) => {
   // ✅ Safety check

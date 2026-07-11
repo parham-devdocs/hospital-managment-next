@@ -1,24 +1,22 @@
 // app/admin/doctors/[slug]/appointment/@right/components/EventsSidebar.tsx
-'use client';
+"use client";
 
-import { CalendarDays } from 'lucide-react';
-import AppointmentCard from './appointmentCard';
-import { useAppointments } from '../hooks/useAppointments';
-import EventsSidebarHeader from './eventsSidebarHeader';
-import { EventsSidebarProps } from './types';
-
-
+import { CalendarDays } from "lucide-react";
+import { EventsSidebarProps } from "../types";
+import { useAppointments } from "../../customCalendar/hooks/useAppointments";
+import EventsSidebarHeader from "./eventsSidebarHeader";
+import AppointmentCard from "./appointmentCard";
 
 export default function EventsSidebar({ date, doctorId }: EventsSidebarProps) {
-  const { appointments, count } = useAppointments({ 
-    doctorId, 
-    date 
+  const { appointments, count } = useAppointments({
+    doctorId,
+    date,
   });
-console.log({appointments})
+  console.log({ appointments });
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100/80 p-4">
       {/* Header */}
-<EventsSidebarHeader date={date} count={count}/>
+      <EventsSidebarHeader date={date} count={count} />
       {/* Appointments List */}
       <div className="space-y-3 max-h-[1000px] overflow-y-auto pr-1 custom-scroll">
         {appointments.length > 0 ? (
