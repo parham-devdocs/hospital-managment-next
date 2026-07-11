@@ -5,6 +5,7 @@ import { CalendarDays } from 'lucide-react';
 import AppointmentCard from './appointmentCard';
 import { useAppointments } from '../hooks/useAppointments';
 import EventsSidebarHeader from './eventsSidebarHeader';
+import { EventsSidebarProps } from './types';
 
 
 

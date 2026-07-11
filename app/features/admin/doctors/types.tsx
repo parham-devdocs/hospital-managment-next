@@ -28,9 +28,11 @@ export interface Profile {
   }
 
   export interface Patient{
-    profile?:Profile
+    profile:Profile
+    profile_id: string;
     medical_condition_summary:string
     illness:string
+    created_at: string; 
 
   }
 

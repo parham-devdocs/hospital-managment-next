@@ -1,7 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Clock, Stethoscope, Calendar, Pencil, XCircle, User } from "lucide-react";
+import { Clock, Calendar, Pencil, XCircle, User } from "lucide-react";
 import { Appointment } from "../../types";
 import AppointmentCardStatus from "./appointmentCardStatus";
+import DoctorInfo from "./doctorInfo";
+import PatientInfo from "./patientInfo";
 
 type AppointmentCardProps = Appointment & {
   color?: string; // optional, will be used for status color coding
@@ -14,40 +16,13 @@ const AppointmentCard = ({
   title,
   status,
   patient,
-  doctor,
   available_time,
+  doctor,
   onEdit,
   onCancel,
 }: AppointmentCardProps) => {
-  // Status color mapping
-  const statusConfig = {
-    in_progress: {
-      label: "In Progress",
-      bg: "bg-amber-100",
-      text: "text-amber-800",
-      dot: "bg-amber-500",
-    },
-    completed: {
-      label: "Completed",
-      bg: "bg-emerald-100",
-      text: "text-emerald-800",
-      dot: "bg-emerald-500",
-    },
-    cancelled: {
-      label: "Cancelled",
-      bg: "bg-rose-100",
-      text: "text-rose-800",
-      dot: "bg-rose-500",
-    },
-    scheduled: {
-      label: "Scheduled",
-      bg: "bg-blue-100",
-      text: "text-blue-800",
-      dot: "bg-blue-500",
-    },
-  };
+  
 
-  const statusInfo = statusConfig[status as keyof typeof statusConfig] || statusConfig.scheduled;
 
   const formattedDate = available_time?.date
     ? new Date(available_time.date).toLocaleDateString("en-US", {
@@ -72,49 +47,13 @@ const AppointmentCard = ({
         </div>
 
         {/* Doctor Info */}
-        <div className="flex items-center gap-3.5 p-2.5 bg-gray-50/70 rounded-xl">
-          <div className="w-11 h-11 rounded-full bg-blue-100/70 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-blue-100/50">
-            <Avatar className="w-full h-full">
-              <AvatarImage src={doctor?.profile?.avatar_url} alt="Doctor" />
-              <AvatarFallback className="bg-blue-100 text-blue-700 text-sm font-medium">
-                {doctor?.profile?.fullName?.charAt(0) || "D"}
-              </AvatarFallback>
-            </Avatar>
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-gray-900 truncate">
-              Dr. {doctor?.profile?.fullName || "Unknown"}
-            </p>
-            <p className="text-xs text-gray-500 flex items-center gap-1.5">
-              <Stethoscope className="w-3 h-3" />
-              <span>{doctor?.specialty?.name || "General"}</span>
-            </p>
-          </div>
-        </div>
+      <DoctorInfo fullName={doctor?.profile.fullName} specialty={doctor?.specialty.name} avatar_url={doctor?.profile.avatar_url}/>
 
         {/* Divider */}
         <div className="border-t border-gray-100/80" />
 
         {/* Patient Info */}
-        <div className="flex items-center gap-3.5 p-2.5 bg-gray-50/70 rounded-xl">
-          <div className="w-11 h-11 rounded-full bg-green-100/70 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-green-100/50">
-            <Avatar className="w-full h-full">
-              <AvatarImage src={patient?.profile?.avatar_url} alt="Patient" />
-              <AvatarFallback className="bg-green-100 text-green-700 text-sm font-medium">
-                {patient?.profile?.fullName?.charAt(0) || "P"}
-              </AvatarFallback>
-            </Avatar>
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-gray-900 truncate">
-              {patient?.profile?.fullName || "Unknown Patient"}
-            </p>
-            <p className="text-xs text-gray-500 flex items-center gap-1.5">
-              <User className="w-3 h-3" />
-              <span>Patient</span>
-            </p>
-          </div>
-        </div>
+ <PatientInfo fullName={patient?.profile.fullName} avatar_url={patient?.profile.avatar_url}/>
 
         {/* Divider */}
         <div className="border-t border-gray-100/80" />
