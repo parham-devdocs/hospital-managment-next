@@ -1,6 +1,6 @@
 import { WEEKDAYS } from "../../data";
 
-const WeekdaysHeader = () => {
+const CalendarWeekdays = () => {
   return (
     <div className="grid grid-cols-7 gap-1 mb-2">
       {WEEKDAYS.map((day) => (
@@ -15,4 +15,4 @@ const WeekdaysHeader = () => {
   );
 };
 
-export default WeekdaysHeader;
+export default CalendarWeekdays

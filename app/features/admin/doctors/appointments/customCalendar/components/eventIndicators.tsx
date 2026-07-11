@@ -1,4 +1,4 @@
-import { Appointment } from "@/app/shared/types";
+import { Appointment } from "../../../types";
 
 const EventIndicators = ({ events, color }: { events: Appointment[]; color: string }) => {
     if (events.length === 0) return null;
