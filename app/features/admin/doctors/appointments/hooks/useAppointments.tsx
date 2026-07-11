@@ -1,117 +1,129 @@
 // hooks/useAppointments.ts
-import { useState, useEffect, useCallback } from 'react'
-import { createClient } from "@/app/utils/supabase/client"
-import { Appointment } from "@/app/shared/types"
+import { useState, useEffect, useCallback } from 'react';
+import { createClient } from "@/app/utils/supabase/client";
+import { Appointment } from '../../types';
 
 type UseAppointmentsOptions = {
-  doctorId: number
-  status?: string
-  date?: string // Changed to string (YYYY-MM-DD format)
-  startDate?: string // Changed to string (YYYY-MM-DD format)
-  endDate?: string 
-  autoFetch?: boolean
-}
+  doctorId: number;
+  status?: string;
+  date?: string;
+  startDate?: string;
+  endDate?: string;
+  autoFetch?: boolean;
+};
 
-export const useAppointments = ({ 
-  doctorId, 
+export const useAppointments = ({
+  doctorId,
   status = 'in_progress',
   date,
   startDate,
   endDate,
-  autoFetch = true 
+  autoFetch = true,
 }: UseAppointmentsOptions) => {
-  const [appointments, setAppointments] = useState<Appointment[]>([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [count, setCount] = useState(0)
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [loading, setLoading] = useState(true); // ⭐ ALWAYS start as true
+  const [error, setError] = useState<string | null>(null);
+  const [count, setCount] = useState(0);
+  const [hasFetched, setHasFetched] = useState(false); // ⭐ Track if fetch has run
 
-  const supabase = createClient()
+  const supabase = createClient();
 
   const fetchAppointments = useCallback(async () => {
-    if (!doctorId) return
+    // Handle missing doctorId
+    if (!doctorId) {
+      console.warn('⚠️ No doctorId provided');
+      setAppointments([]);
+      setCount(0);
+      setLoading(false);
+      setHasFetched(true);
+      return;
+    }
 
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
 
     try {
-      // Build the query with relationship
+      console.log('🔵 Fetching appointments for:', { doctorId, status, date, startDate, endDate });
+
       let query = supabase
         .from("appointment")
         .select(`
           *,
-          available_time (*)
+          available_time (*),
+          doctor:doctor_id (
+            profile:profile_id (
+              fullName
+            ),
+            specialty:specialty_id (
+              name
+            )
+          ),
+          patient:patient_id (
+            profile:profile_id (
+              fullName
+            )
+          )
         `, { count: 'exact' })
-        .eq("doctor_id", doctorId)
+        .eq("doctor_id", doctorId);
 
       if (status) {
-        query = query.eq("status", status)
+        query = query.eq("status", status);
       }
 
-      // Filter by available_time.date
       if (date) {
-        query = query.eq("available_time.date", date)
+        console.log('📅 Filtering by date:', date);
+        query = query.eq("available_time.date", date);
       }
 
       if (startDate && endDate) {
-        query = query.gte("available_time.date", startDate).lte("available_time.date", endDate)
+        console.log('📅 Filtering by date range:', startDate, 'to', endDate);
+        query = query
+          .gte("available_time.date", startDate)
+          .lte("available_time.date", endDate);
       }
 
-      // Order by available_time.date and time
       query = query
         .order('date', { ascending: true, foreignTable: 'available_time' })
-        .order('time', { ascending: true, foreignTable: 'available_time' })
+        .order('time', { ascending: true, foreignTable: 'available_time' });
 
-      const { data, error, count: totalCount } = await query
-console.log({data})
-      if (error) throw error
+      const { data, error, count: totalCount } = await query;
+if (date && data && data[0].available_time===null) {
+  return null
+}
+      if (error) {
+        throw new Error(error.message);
+      }
 
-      setAppointments(data as Appointment[] || [])
-      setCount(totalCount || 0)
+      console.log('📊 Found appointments:', data?.length || 0);
+      
+      setAppointments(data as Appointment[] || []);
+      setCount(totalCount || 0);
+      setHasFetched(true);
+      
     } catch (err: any) {
-      setError(err.message)
-      console.error("Error fetching appointments:", err)
+      console.error('❌ Error fetching appointments:', err);
+      setError(err.message || 'Failed to fetch appointments');
+      setAppointments([]);
+      setCount(0);
+      setHasFetched(true);
     } finally {
-      setLoading(false)
+      setLoading(false);
+      console.log('🔄 Loading set to false');
     }
-  }, [doctorId, status, date, startDate, endDate])
+  }, [doctorId, status, date, startDate, endDate]);
 
-  // Auto-fetch on mount or when dependencies change
   useEffect(() => {
     if (autoFetch) {
-      fetchAppointments()
+      fetchAppointments();
     }
-  }, [fetchAppointments, autoFetch])
-
-  // Real-time subscription
-  useEffect(() => {
-    if (!doctorId) return
-
-    const channel = supabase
-      .channel('appointment-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'appointment',
-          filter: `doctor_id=eq.${doctorId}`
-        },
-        () => {
-          fetchAppointments()
-        }
-      )
-      .subscribe()
-
-    return () => {
-      supabase.removeChannel(channel)
-    }
-  }, [doctorId, fetchAppointments])
+  }, [fetchAppointments, autoFetch]);
 
   return {
     appointments,
     count,
     loading,
     error,
-    refetch: fetchAppointments
-  }
-}
+    hasFetched, // ⭐ Export this
+    refetch: fetchAppointments,
+  };
+};

@@ -1,12 +1,18 @@
+// popover.tsx
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { PopoverProps } from "../types";
+import { PopoverProps } from "../../types";
 
 const PopoverComp = ({ date, appointments, color }: PopoverProps) => {
+  // ✅ Safety check
+  if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+    return null;
+  }
+
   const getLightColor = (color: string) => color + "20";
 
   return (

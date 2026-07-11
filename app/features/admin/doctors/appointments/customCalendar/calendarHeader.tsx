@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { type CalendarHeader } from "./types";
+import { CalendarNavigationProps } from "../types";
 
 const CalendarHeader = ({
   goToToday,
   currentDate,
   goToPreviousMonth,
   goToNextMonth,
-}: CalendarHeader) => {
+}: CalendarNavigationProps) => {
   return (
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-4">

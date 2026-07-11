@@ -1,27 +1,4 @@
-import { Appointment } from "@/app/shared/types";
 
-export const appointments: Appointment[] = [
-  {
-    id: "1",
-    title: "Morning Checkup",
-    date: new Date(2026, 6, 2, 9, 0),
-    time: "9:00 AM",
-    description: "Regular health checkup",
-    status: "completed",
-    patient: {
-      id: "p1",
-      name: "John Smith",
-      avatar_url: "",
-    },
-    doctor: {
-      id: "d1",
-      name: "Dr. Sarah Johnson",
-      avatar_url: "",
-      specialty:{name:""}
-    },
-    availableTime:{time:"",date:""}
-  }
-];
 
 export const statusColorMap: Record<string, string> = {
   in_progress: "#3b82f6", // blue

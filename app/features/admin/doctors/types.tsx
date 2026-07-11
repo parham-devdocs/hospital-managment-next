@@ -14,16 +14,38 @@ export interface Profile {
   }
   export interface Specialty{
     id:string
-    specialty:string
+    name:string
   }
+  export interface Appointment {
+    id: string;
+    title: string;
   
+    description?: string;
+    status: "in_progress" | "completed" | "cancelled";
+    patient?: Patient
+    doctor?: Doctor
+    available_time:AvailableTime
+  }
+
+  export interface Patient{
+    profile?:Profile
+    medical_condition_summary:string
+    illness:string
+
+  }
+
+  export interface AvailableTime{
+    time:string
+    date:string
+  
+  }
   export interface Doctor {
     id: number;
     profile_id: string;
     specialty_id: string
     years_experience: number;
     created_at: string; // ISO date string
-    profiles: Profile;
+    profile: Profile;
     specialty:Specialty
   }
   export interface Column {

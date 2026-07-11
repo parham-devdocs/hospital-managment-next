@@ -1,9 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Clock, Stethoscope, Calendar, Pencil, XCircle } from 'lucide-react'
-import { format } from "date-fns"
-import { Appointment } from "@/app/shared/types"
+import { Appointment } from "../../types"
 
-const AppointmentCard = ({ time, title, patient, date, doctor }: Appointment & {color:string}) => {
+const AppointmentCard = ({ available_time, title, patient,  doctor }: Appointment & {color:string}) => {
   return (
     <div className="w-full bg-white rounded-2xl shadow-xl border border-gray-100/80 ">
       
@@ -22,14 +21,14 @@ const AppointmentCard = ({ time, title, patient, date, doctor }: Appointment & {
         <div className="flex items-center gap-3.5">
           <div className="w-11 h-11 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-blue-100/50">
             <Avatar className="w-full h-full">
-              <AvatarImage src={doctor?.avatar_url} alt="Doctor" />
+              <AvatarImage src={doctor?.profile.avatar_url} alt="Doctor" />
               <AvatarFallback className="bg-blue-50 text-blue-700 text-sm font-medium">
-                {doctor?.name?.charAt(0) || "D"}
+                {doctor?.profile?.fullName?.charAt(0) || "D"}
               </AvatarFallback>
             </Avatar>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-gray-900 truncate">Dr. {doctor?.name}</p>
+            <p className="text-sm font-semibold text-gray-900 truncate">Dr. {doctor?.profile.fullName}</p>
             <p className="text-xs text-gray-500 flex items-center gap-1.5">
               <Stethoscope className="w-3 h-3" />
               <span>{doctor?.specialty?.name || "General"}</span>
@@ -44,14 +43,14 @@ const AppointmentCard = ({ time, title, patient, date, doctor }: Appointment & {
         <div className="flex items-center gap-3.5">
           <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-green-100/50">
             <Avatar className="w-full h-full">
-              <AvatarImage src={patient?.avatar_url} alt="Patient" />
+              <AvatarImage src={patient?.profile?.avatar_url} alt="Patient" />
               <AvatarFallback className="bg-green-50 text-green-700 text-xs font-medium">
-                {patient?.name?.charAt(0) || "P"}
+                {patient?.profile?.fullName?.charAt(0) || "P"}
               </AvatarFallback>
             </Avatar>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-gray-900 truncate">{patient?.name}</p>
+            <p className="text-sm font-semibold text-gray-900 truncate">{patient?.profile?.fullName}</p>
             <p className="text-xs text-gray-500">Patient</p>
           </div>
         </div>
@@ -65,13 +64,13 @@ const AppointmentCard = ({ time, title, patient, date, doctor }: Appointment & {
             <div className="p-1.5 bg-gray-50 rounded-lg">
               <Calendar className="w-3.5 h-3.5 text-gray-400" />
             </div>
-            <span className="font-medium">{format(new Date(date), "MMM dd, yyyy")}</span>
+            <span className="font-medium">{available_time?.date}</span>
           </div>
           <div className="flex items-center gap-2.5 text-sm text-gray-600">
             <div className="p-1.5 bg-gray-50 rounded-lg">
               <Clock className="w-3.5 h-3.5 text-gray-400" />
             </div>
-            <span className="font-medium">{time}</span>
+            <span className="font-medium">{available_time?.time}</span>
           </div>
         </div>
       </div>
