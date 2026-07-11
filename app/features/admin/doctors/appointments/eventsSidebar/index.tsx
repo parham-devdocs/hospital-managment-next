@@ -6,10 +6,7 @@ import AppointmentCard from './appointmentCard';
 import { useAppointments } from '../hooks/useAppointments';
 import EventsSidebarHeader from './eventsSidebarHeader';
 
-interface EventsSidebarProps {
-  date: string;
-  doctorId: number;  // ← Now receives doctorId as prop
-}
+
 
 export default function EventsSidebar({ date, doctorId }: EventsSidebarProps) {
   const { appointments, count } = useAppointments({ 

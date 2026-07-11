@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, Stethoscope, Calendar, Pencil, XCircle, User } from "lucide-react";
 import { Appointment } from "../../types";
+import AppointmentCardStatus from "./appointmentCardStatus";
 
 type AppointmentCardProps = Appointment & {
   color?: string; // optional, will be used for status color coding
@@ -67,12 +68,7 @@ const AppointmentCard = ({
           <h4 className="text-sm font-semibold text-gray-900 leading-tight line-clamp-1">
             {title || "Appointment"}
           </h4>
-          <span
-            className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full ${statusInfo.bg} ${statusInfo.text} capitalize whitespace-nowrap`}
-          >
-            <span className={`w-1.5 h-1.5 rounded-full ${statusInfo.dot}`} />
-            {statusInfo.label}
-          </span>
+       <AppointmentCardStatus status={status}/>
         </div>
 
         {/* Doctor Info */}
