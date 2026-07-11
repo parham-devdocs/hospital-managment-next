@@ -1,34 +1,94 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Clock, Stethoscope, Calendar, Pencil, XCircle } from 'lucide-react'
-import { Appointment } from "../../types"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Clock, Stethoscope, Calendar, Pencil, XCircle, User } from "lucide-react";
+import { Appointment } from "../../types";
 
-const AppointmentCard = ({ available_time, title, patient,  doctor }: Appointment & {color:string}) => {
+type AppointmentCardProps = Appointment & {
+  color?: string; // optional, will be used for status color coding
+  onEdit?: (id: number) => void;
+  onCancel?: (id: number) => void;
+};
+
+const AppointmentCard = ({
+  id,
+  title,
+  status,
+  patient,
+  doctor,
+  available_time,
+  onEdit,
+  onCancel,
+}: AppointmentCardProps) => {
+  // Status color mapping
+  const statusConfig = {
+    in_progress: {
+      label: "In Progress",
+      bg: "bg-amber-100",
+      text: "text-amber-800",
+      dot: "bg-amber-500",
+    },
+    completed: {
+      label: "Completed",
+      bg: "bg-emerald-100",
+      text: "text-emerald-800",
+      dot: "bg-emerald-500",
+    },
+    cancelled: {
+      label: "Cancelled",
+      bg: "bg-rose-100",
+      text: "text-rose-800",
+      dot: "bg-rose-500",
+    },
+    scheduled: {
+      label: "Scheduled",
+      bg: "bg-blue-100",
+      text: "text-blue-800",
+      dot: "bg-blue-500",
+    },
+  };
+
+  const statusInfo = statusConfig[status as keyof typeof statusConfig] || statusConfig.scheduled;
+
+  const formattedDate = available_time?.date
+    ? new Date(available_time.date).toLocaleDateString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      })
+    : "";
+
+  const formattedTime = available_time?.time || "";
+
   return (
-    <div className="w-full bg-white rounded-2xl shadow-xl border border-gray-100/80 ">
-      
-
-      {/* Body */}
+    <div className="group w-full bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 transition-all duration-200 hover:-translate-y-1">
+      {/* Card Content */}
       <div className="p-5 space-y-4">
-        {/* Status */}
-        <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-gray-900">{title}</span>
-          <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 capitalize">
-            Scheduled
+        {/* Header: Title + Status */}
+        <div className="flex justify-between items-start gap-3">
+          <h4 className="text-sm font-semibold text-gray-900 leading-tight line-clamp-1">
+            {title || "Appointment"}
+          </h4>
+          <span
+            className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full ${statusInfo.bg} ${statusInfo.text} capitalize whitespace-nowrap`}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${statusInfo.dot}`} />
+            {statusInfo.label}
           </span>
         </div>
 
-        {/* Doctor */}
-        <div className="flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-blue-100/50">
+        {/* Doctor Info */}
+        <div className="flex items-center gap-3.5 p-2.5 bg-gray-50/70 rounded-xl">
+          <div className="w-11 h-11 rounded-full bg-blue-100/70 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-blue-100/50">
             <Avatar className="w-full h-full">
-              <AvatarImage src={doctor?.profile.avatar_url} alt="Doctor" />
-              <AvatarFallback className="bg-blue-50 text-blue-700 text-sm font-medium">
+              <AvatarImage src={doctor?.profile?.avatar_url} alt="Doctor" />
+              <AvatarFallback className="bg-blue-100 text-blue-700 text-sm font-medium">
                 {doctor?.profile?.fullName?.charAt(0) || "D"}
               </AvatarFallback>
             </Avatar>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-gray-900 truncate">Dr. {doctor?.profile.fullName}</p>
+            <p className="text-sm font-semibold text-gray-900 truncate">
+              Dr. {doctor?.profile?.fullName || "Unknown"}
+            </p>
             <p className="text-xs text-gray-500 flex items-center gap-1.5">
               <Stethoscope className="w-3 h-3" />
               <span>{doctor?.specialty?.name || "General"}</span>
@@ -39,19 +99,24 @@ const AppointmentCard = ({ available_time, title, patient,  doctor }: Appointmen
         {/* Divider */}
         <div className="border-t border-gray-100/80" />
 
-        {/* Patient */}
-        <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-green-100/50">
+        {/* Patient Info */}
+        <div className="flex items-center gap-3.5 p-2.5 bg-gray-50/70 rounded-xl">
+          <div className="w-11 h-11 rounded-full bg-green-100/70 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-green-100/50">
             <Avatar className="w-full h-full">
               <AvatarImage src={patient?.profile?.avatar_url} alt="Patient" />
-              <AvatarFallback className="bg-green-50 text-green-700 text-xs font-medium">
+              <AvatarFallback className="bg-green-100 text-green-700 text-sm font-medium">
                 {patient?.profile?.fullName?.charAt(0) || "P"}
               </AvatarFallback>
             </Avatar>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-gray-900 truncate">{patient?.profile?.fullName}</p>
-            <p className="text-xs text-gray-500">Patient</p>
+            <p className="text-sm font-semibold text-gray-900 truncate">
+              {patient?.profile?.fullName || "Unknown Patient"}
+            </p>
+            <p className="text-xs text-gray-500 flex items-center gap-1.5">
+              <User className="w-3 h-3" />
+              <span>Patient</span>
+            </p>
           </div>
         </div>
 
@@ -59,35 +124,41 @@ const AppointmentCard = ({ available_time, title, patient,  doctor }: Appointmen
         <div className="border-t border-gray-100/80" />
 
         {/* Date & Time */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex items-center gap-2.5 text-sm text-gray-600">
-            <div className="p-1.5 bg-gray-50 rounded-lg">
-              <Calendar className="w-3.5 h-3.5 text-gray-400" />
+        <div className="flex items-center justify-between text-sm text-gray-600">
+          <div className="flex items-center gap-2.5">
+            <div className="p-1.5 bg-gray-100/80 rounded-lg">
+              <Calendar className="w-3.5 h-3.5 text-gray-500" />
             </div>
-            <span className="font-medium">{available_time?.date}</span>
+            <span className="font-medium">{formattedDate || "No date"}</span>
           </div>
-          <div className="flex items-center gap-2.5 text-sm text-gray-600">
-            <div className="p-1.5 bg-gray-50 rounded-lg">
-              <Clock className="w-3.5 h-3.5 text-gray-400" />
+          <div className="flex items-center gap-2.5">
+            <div className="p-1.5 bg-gray-100/80 rounded-lg">
+              <Clock className="w-3.5 h-3.5 text-gray-500" />
             </div>
-            <span className="font-medium">{available_time?.time}</span>
+            <span className="font-medium">{formattedTime || "No time"}</span>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="flex gap-2 px-5 py-3.5 border-t border-gray-100 bg-gray-50/60">
-        <button className="flex-1 px-3 py-2 text-xs font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-1.5">
-          <Pencil className="w-3.5 h-3.5" />
+      {/* Footer Actions */}
+      <div className="flex gap-3 px-5 py-3.5 border-t border-gray-100 bg-gray-50/50 rounded-b-2xl">
+        <button
+          onClick={() => onEdit?.(id)}
+          className="flex-1 px-4 py-2.5 text-xs font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 shadow-sm shadow-blue-200/50"
+        >
+          <Pencil className="w-4 h-4" />
           Edit
         </button>
-        <button className="flex-1 px-3 py-2 text-xs font-medium border border-gray-200 bg-white text-gray-600 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-1.5">
-          <XCircle className="w-3.5 h-3.5" />
+        <button
+          onClick={() => onCancel?.(id)}
+          className="flex-1 px-4 py-2.5 text-xs font-semibold text-gray-700 bg-white border border-gray-200/80 rounded-xl hover:bg-gray-50 hover:border-gray-300 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 shadow-sm"
+        >
+          <XCircle className="w-4 h-4" />
           Cancel
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AppointmentCard
+export default AppointmentCard;
