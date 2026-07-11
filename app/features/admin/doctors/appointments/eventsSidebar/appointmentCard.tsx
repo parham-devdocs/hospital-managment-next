@@ -4,6 +4,7 @@ import { Appointment } from "../../types";
 import AppointmentCardStatus from "./appointmentCardStatus";
 import DoctorInfo from "./doctorInfo";
 import PatientInfo from "./patientInfo";
+import Time from "./time";
 
 type AppointmentCardProps = Appointment & {
   color?: string; // optional, will be used for status color coding
@@ -24,15 +25,6 @@ const AppointmentCard = ({
   
 
 
-  const formattedDate = available_time?.date
-    ? new Date(available_time.date).toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-      })
-    : "";
-
-  const formattedTime = available_time?.time || "";
 
   return (
     <div className="group w-full bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 transition-all duration-200 hover:-translate-y-1">
@@ -58,21 +50,7 @@ const AppointmentCard = ({
         {/* Divider */}
         <div className="border-t border-gray-100/80" />
 
-        {/* Date & Time */}
-        <div className="flex items-center justify-between text-sm text-gray-600">
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 bg-gray-100/80 rounded-lg">
-              <Calendar className="w-3.5 h-3.5 text-gray-500" />
-            </div>
-            <span className="font-medium">{formattedDate || "No date"}</span>
-          </div>
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 bg-gray-100/80 rounded-lg">
-              <Clock className="w-3.5 h-3.5 text-gray-500" />
-            </div>
-            <span className="font-medium">{formattedTime || "No time"}</span>
-          </div>
-        </div>
+      <Time time={available_time.time} />
       </div>
 
       {/* Footer Actions */}
