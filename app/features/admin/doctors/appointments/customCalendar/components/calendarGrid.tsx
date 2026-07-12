@@ -3,7 +3,7 @@ import { isSameDay, isToday, isWeekend, format } from "date-fns";
 import DayCell from "./dayCell";
 import { getDayColor, getEventsForDay } from "../../utils/calendarHelpers";
 import { Appointment } from "../../../types";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface CalendarGridProps {
   days: (Date | null)[];
@@ -40,7 +40,7 @@ export const CalendarGrid = ({
   const pushRoute = useCallback((day: Date) => {
     const formattedDate = format(day, 'yyyy-MM-dd');
     const cleanPath = pathname.replace(/\/$/, '');
-    const newPath = `${pathname}?date=${formattedDate}`;
+    const newPath = `${pathname}/?date=${formattedDate}`;
     
     const finalPath = newPath === cleanPath ? `${cleanPath}/${formattedDate}` : newPath;
     

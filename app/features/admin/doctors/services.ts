@@ -5,7 +5,7 @@ import { Doctor } from "./types";
 import paginate from "@/app/shared/utils/paginate";
 export async function getDoctors(page: number) {
   const supabase = createClient();
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
 
   // Get total count first
   const { count, error: countError } = await supabase
@@ -40,8 +40,8 @@ export async function getDoctors(page: number) {
     .from("doctor")
     .select(`
       *,
-      profiles (*),
-      specialty("specialty")
+      profile(*),
+      specialty("name")
     `)
     .range(skip, end - 1); // Supabase range is inclusive, so end - 1
 

@@ -7,8 +7,8 @@ export default async function RightPanelWithDate({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const resolvedParams = await params;
-  const doctorId = resolvedParams.slug;
+  const doctorId = (await params).slug;
+
 
   // Get today's date
   const today = new Date();

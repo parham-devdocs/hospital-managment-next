@@ -1,8 +1,7 @@
 "use server"
 
 import { createClient } from "@/app/utils/supabase/client";
-import paginate from "@/app/shared/utils/paginate";
-import { Appointment } from "@/app/shared/types";
+import { Appointment } from "../types";
 export async function getAppointmentsOfDoctor(doctorId:number) {
   const supabase = createClient();
 
