@@ -1,7 +1,17 @@
-// hooks/useAppointments.ts
 import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/app/utils/supabase/client";
 import { Appointment } from "../../../types";
+
+type AppointmentWithRelations = Appointment & {
+  available_time: any;
+  doctor: {
+    profile: { fullName: string };
+    specialty: { name: string };
+  };
+  patient: {
+    profile: { fullName: string };
+  };
+};
 
 type UseAppointmentsOptions = {
   doctorId: number;
@@ -16,8 +26,8 @@ export const useAppointments = ({
   date,
   autoFetch = true,
 }: UseAppointmentsOptions) => {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [appointments, setAppointments] = useState<AppointmentWithRelations[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [count, setCount] = useState(0);
 
@@ -25,9 +35,8 @@ export const useAppointments = ({
 
   const fetchAppointments = useCallback(async () => {
     if (!doctorId) {
-      setAppointments([]); // ✅ Clear appointments
+      setAppointments([]);
       setCount(0);
-      setLoading(false);
       setError(null);
       return;
     }
@@ -76,21 +85,20 @@ export const useAppointments = ({
       }
 
       console.log("📊 Found appointments:", data?.length || 0);
+      console.log("📋 Appointment data:", data);
 
-      // ✅ Always set appointments - even if empty array
-      setAppointments((data as Appointment[]) || []);
+      setAppointments((data as AppointmentWithRelations[]) || []);
       setCount(totalCount || 0);
-      
     } catch (err: any) {
       console.error("❌ Error fetching appointments:", err);
       setError(err.message || "Failed to fetch appointments");
-      setAppointments([]); // ✅ Clear on error
+      setAppointments([]);
       setCount(0);
     } finally {
       setLoading(false);
       console.log("🔄 Loading set to false");
     }
-  }, [doctorId, status, date]);
+  }, [doctorId, status, date, supabase]);
 
   useEffect(() => {
     if (autoFetch) {

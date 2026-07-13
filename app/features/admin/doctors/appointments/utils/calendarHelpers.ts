@@ -8,7 +8,7 @@ import {
   isWeekend,
 } from "date-fns";
 import { colorMap } from "../data";
-import { Appointment } from "@/app/shared/types";
+import { Appointment } from "../../types";
 
 // ✅ FIXED: Proper calendar days generation
 export const getCalendarDays = (currentDate: Date) => {
@@ -77,7 +77,7 @@ export const getEventsForDay = (date: Date, appointments: Appointment[]) => {
 
     if (event.available_time?.date) {
       eventDate = new Date(event.available_time.date);
-    } else if (event.available_time.date) {
+    } else if (event.available_time?.date) {
       eventDate = new Date(event.available_time.date);
     } else if (typeof event.available_time?.time === "string") {
       eventDate = new Date(event.available_time.date);

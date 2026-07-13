@@ -18,13 +18,7 @@ const PopoverComp = ({ date, appointments, color }: PopoverProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild className="cursor-pointer">
-        <div
-          className="absolute inset-0 w-full h-full cursor-pointer"
-          style={{
-            backgroundColor: getLightColor(color),
-            borderRadius: "inherit",
-          }}
-        />
+     
       </PopoverTrigger>
       <PopoverContent
         className="w-80 p-4 z-50"

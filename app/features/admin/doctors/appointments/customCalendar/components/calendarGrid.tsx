@@ -37,18 +37,13 @@ export const CalendarGrid = ({
     });
   }, [days, appointments, selectedDate]);
 
-  const pushRoute = useCallback((day: Date) => {
-    const formattedDate = format(day, 'yyyy-MM-dd');
-    const cleanPath = pathname.replace(/\/$/, '');
-    const newPath = `${pathname}/?date=${formattedDate}`;
-    
-    const finalPath = newPath === cleanPath ? `${cleanPath}/${formattedDate}` : newPath;
-    
-    router.replace(finalPath, { scroll: false });
-    
-    onDateSelect(day);
-  }, [pathname, router, onDateSelect]);
-
+// In CalendarGrid.tsx
+const pushRoute = useCallback((day: Date) => {
+  const formattedDate = format(day, 'yyyy-MM-dd');
+  const newPath = `${pathname}?date=${formattedDate}`; // simpler path
+  router.push(newPath, { scroll: false });
+  onDateSelect(day); // still updates the calendar highlight
+}, [pathname, router, onDateSelect]);
 
   return (
     <div className="grid grid-cols-7 gap-2">
