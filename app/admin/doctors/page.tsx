@@ -1,9 +1,9 @@
 import Header from "@/app/shared/components/header";
 import DoctorsTable from "../../features/admin/doctors";
 import { BriefcaseMedical } from "lucide-react";
-import { getDoctors } from "@/app/features/admin/doctors/services";
 import { PageProps } from "../../shared/types";
 import PaginationComp from "@/app/shared/components/pagination/pagination";
+import getDoctors from "@/app/services/doctors";
 
 const page = async ({ searchParams }: PageProps) => {
   // Get page from URL query string
@@ -15,11 +15,10 @@ const page = async ({ searchParams }: PageProps) => {
   // Fetch doctors with pagination
   const {
     data: doctors,
-    error,
-    count,
-    totalPages,
-  } = await getDoctors(currentPage);
-
+    error
+  } = await getDoctors({page:currentPage});
+  
+console.log(doctors)
   // Render content based on state
   const renderContent = () => {
     // Loading state
@@ -42,7 +41,7 @@ const page = async ({ searchParams }: PageProps) => {
         <div className="flex h-full w-full items-center justify-center p-8">
           <div className="text-center text-red-500">
             <p className="font-semibold">Error loading doctors</p>
-            <p className="text-sm">{(error as any).message}</p>
+            <p className="text-sm">{(error).message}</p>
           </div>
         </div>
       );
@@ -63,20 +62,20 @@ const page = async ({ searchParams }: PageProps) => {
     return (
       <>
         <DoctorsTable doctors={doctors} />
-        {totalPages > 1 && (
+        {/* {totalPages > 1 && (
           <PaginationComp pageCount={totalPages} activePage={currentPage} />
-        )}
+        )} */}
       </>
     );
   };
 
   return (
     <div className="w-full h-3/4 px-10 py-4 space-y-3.5">
-      <Header
+      {/* <Header
         title="List Of Doctors"
         subtitle={`${count || 0} doctors found`}
         icon={<BriefcaseMedical />}
-      />
+      /> */}
       {renderContent()}
     </div>
   );

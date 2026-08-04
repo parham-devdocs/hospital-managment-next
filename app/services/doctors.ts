@@ -1,6 +1,8 @@
 "use server"
 
+import { AxiosError } from "axios"
 import axiosClient from "../axiosClient"
+import { Doctor } from "../features/admin/doctors/types"
 
 export type GetDoctorsServiceQuery = {
   isActive?: boolean
@@ -41,11 +43,16 @@ async function getDoctors({
   }
   
   const queryString = params.toString()
-  const url = queryString ? `doctors?${queryString}` : 'doctors'
+  const url = queryString ? `doctor?${queryString}` : 'doctors'
+  try {
+    const response = await axiosClient.get(url)
   
-  const response = await axiosClient.get(url)
-  
-  return response.data
+    return {data:response.data as Doctor[],error:null}
+
+  } catch (error) {
+    return {error:error as AxiosError,data:[]}
+  }
+
 }
 
 export default getDoctors

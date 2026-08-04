@@ -41,14 +41,21 @@ export interface Profile {
     date:string
   
   }
-  export interface Doctor {
-    id: number;
-    profile_id: string;
-    specialty_id: string
-    years_experience: number;
-    created_at: string; // ISO date string
-    profile: Profile;
-    specialty:Specialty
+ 
+  export type Doctor = {
+    id: string
+    fullName: string
+    email: string
+    phoneNumber: string
+    gender: string 
+    avatarUrl: string | null
+    isActive: boolean
+    specialties: string[]
+    certificationCount: number
+    educationCount: number
+    workExperienceCount: number
+    createdAt: string | Date
+    updatedAt: string | Date
   }
   export interface Column {
     key: string;
