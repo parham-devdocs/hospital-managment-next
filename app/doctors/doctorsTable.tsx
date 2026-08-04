@@ -12,7 +12,7 @@ import {
 const DoctorsTable = () => {
   return (
     <Table>
-    <TableCaption>A list of your recent invoices.</TableCaption>
+    <TableCaption>A list of Doctors</TableCaption>
     <TableHeader>
       <TableRow>
         <TableHead className="w-[100px]">Invoice</TableHead>
