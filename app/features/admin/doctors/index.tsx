@@ -17,25 +17,25 @@ const DoctorsPage = async ({ doctors }: { doctors: Doctor[] }) => {
                 <TableRow key={doctor.id}>
                   <TableCellComp type="number">{index + 1}</TableCellComp>
                   <AvatarTableCell
-                    fallbackText={doctor.profile.fullName}
-                    imageUrl={doctor.profile.avatar_url}
+                    fallbackText={doctor.fullName}
+                    imageUrl={doctor.avatarUrl ?? ""}
                   />
-                  <TableCellComp type="string">
-                    {doctor.profile.fullName}
-                  </TableCellComp>
-                  <TableCellComp type="string">
-                    {doctor.profile.email}
-                  </TableCellComp>
+                  <TableCellComp type="string">{doctor.fullName}</TableCellComp>
+                  <TableCellComp type="string">{doctor.email}</TableCellComp>
                   <TableCellComp type="string" badge>
-                    {doctor.specialty.name}
+                    {doctor.specialties?.join(", ") || "N/A"}
                   </TableCellComp>
 
                   <TableCellComp type="number" badge>
-                    {doctor.years_experience}
+                    {doctor.workExperienceCount}
                   </TableCellComp>
-                  <TableCellComp type="date">
-                    {doctor.profile.created_at}
+                  <TableCellComp type="number" badge>
+                    {doctor.certificationCount}
                   </TableCellComp>
+                  <TableCellComp type="number" badge>
+                    {doctor.educationCount}
+                  </TableCellComp>
+                  <TableCellComp type="date">{doctor.createdAt}</TableCellComp>
                   <GenericDropDownMenu id={String(doctor.id)} />
                 </TableRow>
               ))}

@@ -3,6 +3,7 @@
 import { AxiosError } from "axios"
 import axiosClient from "../axiosClient"
 import { Doctor } from "../features/admin/doctors/types"
+import { PaginatedApiResponse } from "../shared/types"
 
 export type GetDoctorsServiceQuery = {
   isActive?: boolean
@@ -45,9 +46,9 @@ async function getDoctors({
   const queryString = params.toString()
   const url = queryString ? `doctor?${queryString}` : 'doctors'
   try {
-    const response = await axiosClient.get(url)
+    const response = await axiosClient.get<PaginatedApiResponse<Doctor>>(url)
   
-    return {data:response.data as Doctor[],error:null}
+    return {data:response.data.data,pagination:response.data.pagination,status:response.data.status,success:response.data.success ,error:null}
 
   } catch (error) {
     return {error:error as AxiosError,data:[]}
