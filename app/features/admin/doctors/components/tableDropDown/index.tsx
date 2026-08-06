@@ -11,7 +11,6 @@ import {
 import {
   Calendar,
   Clock,
-  Eye,
   MoreHorizontal,
   Pencil,
   Trash2,
@@ -41,10 +40,7 @@ const GenericDropDownMenu = ({ id }: { id: string }) => {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={() => router.push(`/admin/doctors/${id}`)}>
-          <Eye className="mr-2 h-4 w-4" />
-          View Details
-        </DropdownMenuItem>
+      
 
         <DropdownMenuItem
           onClick={() => router.push(`/admin/doctors/${id}/profile`)}

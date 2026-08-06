@@ -10,8 +10,8 @@ const AppointmentCard = ({
   title,
   status,
   patient,
-  available_time,
   doctor,
+  available_time,
 }: Appointment) => {
   return (
     <div className="group w-full bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 transition-all duration-200 hover:-translate-y-1">
@@ -27,9 +27,9 @@ const AppointmentCard = ({
 
         {/* Doctor Info */}
         <DoctorInfo
-          fullName={doctor?.profile.fullName}
-          specialty={doctor?.specialty.name}
-          avatar_url={doctor?.profile.avatar_url}
+          fullName={doctor?.fullName}
+          specialties={doctor?.specialties}
+          avatar_url={doctor?.avatar_url}
         />
 
         {/* Divider */}

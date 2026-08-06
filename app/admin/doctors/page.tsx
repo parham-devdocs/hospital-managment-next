@@ -1,7 +1,7 @@
 import { BriefcaseMedical } from "lucide-react";
 import DoctorsTable from "../../features/admin/doctors";
 import { PageProps } from "../../shared/types";
-import getDoctors from "@/app/services/doctors";
+import getDoctors from "@/app/services/doctors/getDoctors";
 import PaginationComp from "@/app/shared/components/pagination/pagination";
 import Header from "@/app/shared/components/header";
 
@@ -18,9 +18,9 @@ const page = async ({ searchParams }: PageProps) => {
     error,
     status,
     success,
-    pagination
-  } = await getDoctors({page:currentPage})
-  
+    pagination,
+  } = await getDoctors({ page: currentPage });
+
   const renderContent = () => {
     if (!doctors && !error) {
       return (
@@ -41,7 +41,7 @@ const page = async ({ searchParams }: PageProps) => {
         <div className="flex h-full w-full items-center justify-center p-8">
           <div className="text-center text-red-500">
             <p className="font-semibold">Error loading doctors</p>
-            <p className="text-sm">{(error).message}</p>
+            <p className="text-sm">{error.message}</p>
           </div>
         </div>
       );
@@ -63,7 +63,10 @@ const page = async ({ searchParams }: PageProps) => {
       <>
         <DoctorsTable doctors={doctors} />
         {pagination.totalItems > 1 && (
-          <PaginationComp pageCount={pagination.totalItems} activePage={currentPage} />
+          <PaginationComp
+            pageCount={pagination.totalItems}
+            activePage={currentPage}
+          />
         )}
       </>
     );
@@ -73,7 +76,7 @@ const page = async ({ searchParams }: PageProps) => {
     <div className="w-full h-3/4 px-10 py-4 space-y-3.5">
       <Header
         title="List Of Doctors"
-        subtitle={`${doctors || 0} doctors found`}
+        subtitle={`${pagination?.totalItems || 0} doctors found`}
         icon={<BriefcaseMedical />}
       />
       {renderContent()}

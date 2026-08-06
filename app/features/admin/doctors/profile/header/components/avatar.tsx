@@ -16,9 +16,9 @@ const Avatar = ({avatar_url,fullName}:Avatar) => {
         <div 
           className="w-full h-full flex items-center justify-center"
         >
-          <span className="text-4xl text-white font-bold">
+          {/* <span className="text-4xl text-white font-bold">
             {fullName.split(' ').map((n: string) => n[0]).join('')}
-          </span>
+          </span> */}
         </div>
       )}
     </div>

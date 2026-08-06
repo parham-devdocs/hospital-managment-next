@@ -7,12 +7,19 @@ import Sidebar from "./shared/components/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({ 
+  subsets: ["latin"], 
+  variable: "--font-sans",
+  display: "swap",
+  preload: false, // Disable preloading to avoid fetch during build
+});
 
 const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
   display: "swap",
+  weight: ['400', '500', '700'], // Specify weights
+  preload: false, // Disable preloading
 });
 
 export const metadata: Metadata = {
@@ -28,13 +35,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full ", roboto.variable, "font-sans", inter.variable)}
+      className={cn("h-full", roboto.variable, inter.variable, "font-sans")}
     >
       <body>
         <TooltipProvider>
           <SidebarProvider>
             <Sidebar />
-            <main className=" w-full">{children}</main>
+            <main className="w-full">{children}</main>
           </SidebarProvider>
         </TooltipProvider>
         <Toaster />

@@ -4,17 +4,20 @@ export interface Profile {
     id: string;
     address: string;
     age: number;
-    avatar_url: string;
-    created_at: string; // ISO date string
+    avatar_url?: string;
+    createdAt: string; // ISO date string
     email: string;
     fullName: string;
     gender: string;
-    phone: string;
+    phoneNumber: string;
     updated_at: string; // ISO date string
   }
   export interface Specialty{
     id:string
     name:string
+    createdAt: Date,
+    updatedAt: Date,
+    deleteAt: null|Date
   }
   export interface Appointment {
     id: string;
@@ -41,22 +44,67 @@ export interface Profile {
     date:string
   
   }
+ // types/doctor.ts
+
+export type DoctorCertification = {
+  name: string;
+  issuingOrganization: string;
+  dateObtained: string | Date;
+  expiryDate: string | Date;
+  certificationNumber: string[]; // Note: This is an array in your DTO
+};
+
+export type DoctorEducation = {
+  medicalSchool: string;
+  graduationYear: number;
+  country: string;
+  degree: string;
+  honors: string[];
+};
+
+export type DoctorWorkExperience = {
+  hospital: string;
+  startDate: string | Date;
+  endDate: string | Date;
+  location: string;
+  position: string;
+  responsibilities: string[];
+};
+
+export interface Doctor  extends Profile {
+  doctorId: string; 
+  isActive: boolean;
+  specialties: Specialty[] 
+  certificationCount: number;
+  educationCount: number;
+  bio?:string
+  workExperienceCount: number;
+  certifications?: DoctorCertification[];
+  educations?: DoctorEducation[]; 
+  workExperiences?: DoctorWorkExperience[]; 
+  updatedAt: string | Date;
+};
+
+// For the API response structure
+export type DoctorApiResponse = {
+  success: boolean;
+  status: number;
+  data: Doctor;
+};
+
+// For paginated response
+export type PaginatedDoctorResponse = {
+  success: boolean;
+  status: number;
+  data: Doctor[];
+  pagination: {
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    limit: number;
+  };
+};
  
-  export type Doctor = {
-    id: string
-    fullName: string
-    email: string
-    phoneNumber: string
-    gender: string 
-    avatarUrl: string | null
-    isActive: boolean
-    specialties: string[]
-    certificationCount: number
-    educationCount: number
-    workExperienceCount: number
-    createdAt: string | Date
-    updatedAt: string | Date
-  }
   export interface Column {
     key: string;
     label: string;

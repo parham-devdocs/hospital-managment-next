@@ -6,6 +6,7 @@ import AvatarTableCell from "@/app/shared/components/table/avatarTableCell";
 import { Doctor } from "./types";
 import GenericDropDownMenu from "@/app/features/admin/doctors/components/tableDropDown";
 const DoctorsPage = async ({ doctors }: { doctors: Doctor[] }) => {
+  console.log(doctors)
   if (doctors && doctors.length > 0) {
     return (
       <div className="w-full h-full p-6">
@@ -14,11 +15,11 @@ const DoctorsPage = async ({ doctors }: { doctors: Doctor[] }) => {
             <TableHeaderComp columns={columns} />
             <TableBody>
               {doctors.map((doctor, index) => (
-                <TableRow key={doctor.id}>
+                <TableRow key={doctor.doctorId}>
                   <TableCellComp type="number">{index + 1}</TableCellComp>
                   <AvatarTableCell
                     fallbackText={doctor.fullName}
-                    imageUrl={doctor.avatarUrl ?? ""}
+                    imageUrl={doctor.avatar_url ?? ""}
                   />
                   <TableCellComp type="string">{doctor.fullName}</TableCellComp>
                   <TableCellComp type="string">{doctor.email}</TableCellComp>
@@ -36,7 +37,7 @@ const DoctorsPage = async ({ doctors }: { doctors: Doctor[] }) => {
                     {doctor.educationCount}
                   </TableCellComp>
                   <TableCellComp type="date">{doctor.createdAt}</TableCellComp>
-                  <GenericDropDownMenu id={String(doctor.id)} />
+                  <GenericDropDownMenu id={doctor.doctorId} />
                 </TableRow>
               ))}
             </TableBody>

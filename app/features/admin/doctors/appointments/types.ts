@@ -1,5 +1,6 @@
 // types.ts
-import { Appointment } from "@/app/shared/types";
+
+import { Appointment } from "../types";
 
 export interface DayCellProps {
   day: Date | null; // ✅ Allow null
