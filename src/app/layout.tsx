@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Roboto, Inter } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils/cn";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import Sidebar from "../shared/components/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
+import { cn } from "../shared/lib/cn";
 
 const inter = Inter({
   subsets: ["latin"],
