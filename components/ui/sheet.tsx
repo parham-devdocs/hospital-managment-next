@@ -2,10 +2,9 @@
 
 import * as React from "react";
 import { Dialog as SheetPrimitive } from "radix-ui";
-
-import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { RiCloseLine } from "@remixicon/react";
+import { cn } from "@/src/shared/lib/cn";
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;

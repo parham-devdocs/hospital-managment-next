@@ -6,6 +6,7 @@ import Sidebar from "../shared/components/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
 import { cn } from "../shared/lib/cn";
+import { AdminNavbar } from "../shared/components/navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,7 +42,11 @@ export default function RootLayout({
         <TooltipProvider>
           <SidebarProvider>
             <Sidebar />
-            <main className="w-full">{children}</main>
+
+            <main className=" flex flex-col overflow-x-hidden relative">
+             <AdminNavbar/>
+              {children}
+            </main>
           </SidebarProvider>
         </TooltipProvider>
         <Toaster />

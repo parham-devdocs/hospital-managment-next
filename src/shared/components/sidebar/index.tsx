@@ -1,14 +1,5 @@
 "use client";
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarRail,
-  useSidebar,
-} from "@/components/ui/sidebar";
 
 import { usePathname } from "next/navigation";
 
@@ -17,11 +8,9 @@ import SidebarMenuItemComp from "./sidebarMenuItem";
 import Event from "./event";
 import Footer from "./footer";
 import { getNavItemsByRole } from "./navItems";
-import { useEffect, useState } from "react";
-import { User } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/client";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarRail, useSidebar } from "@/components/ui/sidebar";
 
-// Navigation items for patient
+// Navigation items for patient (hardcoded)
 const events = [
   {
     date: new Date(2026, 6, 3), // July 3, 2026
@@ -37,59 +26,37 @@ const events = [
   },
 ];
 
-export default function AppSidebar() {
-  const [user, setUser] = useState<User | null | undefined>(null);
-  const [loading, setLoading] = useState(true);
+// Static user data - replace with actual static data or props
+
+
+// Define the props interface
+interface AppSidebarProps {
+  user?: {
+    name: string;
+    email: string;
+    role: "admin"|"patient"|"doctor";
+    avatar?: string;
+  };
+  events?: Array<{ date: Date; note: string }>;
+}
+
+export default function AppSidebar({ 
+  user , 
+  events: customEvents = events 
+}: AppSidebarProps) {
   const pathname = usePathname();
   const { setOpenMobile, open } = useSidebar();
-
-  useEffect(() => {
-    const getUser = async () => {
-      const supabase = createClient();
-
-      const result = await supabase.auth.getUser();
-
-      const {
-        data: { user },
-        error,
-      } = result;
-
-      setUser(user);
-      setLoading(false);
-    };
-
-    getUser();
-
-    const supabase = createClient();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   // Close sidebar on mobile when navigating
   const handleNavigation = () => {
     setOpenMobile(true);
   };
 
-  // Safely get user metadata
-  const userMetadata = user?.user_metadata as {
-    name?: string;
-    avatar?: string;
-    initials?: string;
-  } | null;
-
-  const userName = userMetadata?.name || user?.email?.split("@")[0] || "User";
-  const userAvatar = userMetadata?.avatar || "";
-  const userInitials =
-    userMetadata?.initials || userName?.charAt(0).toUpperCase() || "U";
+  // Use props or fallback to static data
+  const userName = user?.name || "User";
+  const userAvatar = user?.avatar || "";
   const userEmail = user?.email || "";
-  const userRole = user?.app_metadata?.user_role || "patient";
+  const userRole = user?.role || "patient";
   const navItems = getNavItemsByRole(userRole);
 
   return (
@@ -125,7 +92,7 @@ export default function AppSidebar() {
         </SidebarGroup>
 
         {/* Today's Date */}
-        <Event open={open} events={events} />
+        <Event open={open} events={customEvents} />
       </SidebarContent>
 
       {/* Footer with User Profile */}
@@ -134,7 +101,7 @@ export default function AppSidebar() {
         avatar={userAvatar}
         email={userEmail}
         role={userRole}
-        fallback={userInitials}
+        fallback=""
       />
 
       <SidebarRail />
