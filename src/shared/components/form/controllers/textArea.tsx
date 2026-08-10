@@ -3,8 +3,7 @@
 
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group'
-import React from 'react'
-import { Control, Controller, FieldValue, FieldValues, Path } from 'react-hook-form'
+import {  Controller, FieldValues} from 'react-hook-form'
 import { TextAreaProps } from './types'
 
 const TextArea = <T extends FieldValues>({control,fieldLabel,fieldName}:TextAreaProps<T>) => {

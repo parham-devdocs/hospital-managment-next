@@ -4,7 +4,6 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui";
 
-import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -22,7 +21,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { RiSideBarLine } from "@remixicon/react";
-import { useIsMobile } from "@/lib/hooks/use-mobile";
+import { cn } from "@/src/shared/lib/cn";
+import useIsMobile from "@/src/shared/hooks/isMobile";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -65,7 +65,7 @@ function SidebarProvider({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) {
-  const isMobile = useIsMobile();
+  const {isMobile} = useIsMobile()
   const [openMobile, setOpenMobile] = React.useState(false);
 
   // This is the internal state of the sidebar.

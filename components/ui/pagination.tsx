@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
+import { cn } from "@/src/shared/lib/cn";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (

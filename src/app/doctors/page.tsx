@@ -1,4 +1,3 @@
-import React from 'react'
 import DoctorsTable from './doctorsTable'
 
 const Page = () => {

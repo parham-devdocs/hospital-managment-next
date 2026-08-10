@@ -1,5 +1,4 @@
-import CustomCalendar from "@/src/features/admin/doctors/appointments/customCalendar";
-import EventsSidebar from "@/src/features/admin/doctors/appointments/eventsSidebar/components";
+import AppointmentScreen from "@/src/modules/appointments/screens/appointments.screen";
 
 export default async function page({
   params,
@@ -11,17 +10,10 @@ export default async function page({
   const { slug } = await params;
   const { date } = await searchParams;
 
-  console.log("📅 Date from search params:", { date, doctorId: slug });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:m-10">
-      {/* Left side - Events */}
-      <div className="lg:col-span-3">
-        <CustomCalendar />
-      </div>
-      <div className="lg:col-span-1">
-        <EventsSidebar date={date ?? ""} doctorId={+slug} />
-      </div>
+    <div>
+      <AppointmentScreen slug={slug} date={date as string}/>
     </div>
   );
 }

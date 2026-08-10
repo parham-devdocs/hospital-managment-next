@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils/cn";
 import React from "react";
 import { Stethoscope, Sparkles, ChevronRight } from "lucide-react";
+import { cn } from "../lib/cn";
 
 interface HeaderProps {
   title: string;

@@ -4,8 +4,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils/cn";
-import React from "react";
+import { cn } from "../../lib/cn";
 
 export interface EventItem {
   date: Date;

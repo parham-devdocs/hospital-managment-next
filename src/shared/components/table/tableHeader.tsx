@@ -1,6 +1,5 @@
 "use client"
 import { TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import React from 'react';
 import { TableHeaderCompProps } from './types';
 
 

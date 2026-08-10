@@ -3,8 +3,8 @@
 import * as React from "react";
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
 
-import { cn } from "@/lib/utils/cn";
 import { RiCheckLine, RiArrowRightSLine } from "@remixicon/react";
+import { cn } from "@/src/shared/lib/cn";
 
 function DropdownMenu({
   ...props
