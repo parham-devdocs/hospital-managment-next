@@ -1,43 +1,34 @@
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Badge, Bell } from 'lucide-react'
-import React, { useMemo, useState } from 'react'
-import { cn } from '../../lib/cn'
-import Link from 'next/link'
-
-type NotificationType = { 
-  type: "critical" | "warning" | "success" | "info", 
-  title: string, 
-  timestamp: Date, 
-  message: string, 
-  id: string 
-}
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge, Bell } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { cn } from "../../lib/cn";
+import Link from "next/link";
+import { NotificationType } from "./types";
 
 const NotificationsComp = () => {
   const [notifications, setNotifications] = useState<NotificationType[]>([
     {
-      id: '1',
+      id: "1",
       type: "success",
-      title: 'System Error',
-      message: 'Database connection failed',
-      timestamp: new Date()
-    }
-  ])
-  const [unreadCount,setUnreadCount]=useState(1)
-  const [notificationCount, setNotificationCount] = useState<number>(0)
-
-
+      title: "System Error",
+      message: "Database connection failed",
+      timestamp: new Date(),
+    },
+  ]);
+  const [unreadCount, setUnreadCount] = useState(1);
 
   // Function to handle clicking on a specific notification
   function onNotificationClick(notification: NotificationType) {
-
- 
-    
     // Decrement unread count
-
   }
-
-
 
   return (
     <DropdownMenu>
@@ -45,9 +36,7 @@ const NotificationsComp = () => {
         <Button variant="ghost" size="icon" className="relative h-9 w-9">
           <Bell className="h-5 w-5" />
           {unreadCount > 0 && (
-            <Badge className="absolute -right-0.5 -top-0.5 m-5 h-5 rounded-full px-1.5 flex items-center justify-center text-[10px] font-bold bg-red-500 text-white hover:bg-red-600">
-              
-            </Badge>
+            <Badge className="absolute -right-0.5 -top-0.5 m-5 h-5 rounded-full px-1.5 flex items-center justify-center text-[10px] font-bold bg-red-500 text-white hover:bg-red-600"></Badge>
           )}
         </Button>
       </DropdownMenuTrigger>
@@ -75,13 +64,15 @@ const NotificationsComp = () => {
                 onClick={() => onNotificationClick(notification)}
               >
                 <div className="flex items-center gap-2 w-full">
-                  <div className={cn(
-                    "h-2 w-2 rounded-full ",
-                    notification.type === "critical" && "bg-red-500",
-                    notification.type === "warning" && "bg-yellow-500",
-                    notification.type === "success" && "bg-green-500",
-                    notification.type === "info" && "bg-blue-500"
-                  )} />
+                  <div
+                    className={cn(
+                      "h-2 w-2 rounded-full ",
+                      notification.type === "critical" && "bg-red-500",
+                      notification.type === "warning" && "bg-yellow-500",
+                      notification.type === "success" && "bg-green-500",
+                      notification.type === "info" && "bg-blue-500"
+                    )}
+                  />
                   <span className="text-sm font-medium flex-1 truncate">
                     {notification.title}
                   </span>
@@ -101,7 +92,9 @@ const NotificationsComp = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="justify-center text-primary text-sm"
-              onClick={()=>{console.log("")}}
+              onClick={() => {
+                console.log("");
+              }}
             >
               View all {notifications.length} notifications
             </DropdownMenuItem>
@@ -109,7 +102,7 @@ const NotificationsComp = () => {
         )}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export default NotificationsComp
+export default NotificationsComp;
