@@ -3,7 +3,7 @@ import { Control, FieldValues, Path } from "react-hook-form";
 
 
 export interface GeneralInputType<T extends FieldValues> {
-    control: Control<T>; 
+    control?: Control<T>; 
     fieldName:Path<T>
     fieldLabel:string
     placeHolder?:string

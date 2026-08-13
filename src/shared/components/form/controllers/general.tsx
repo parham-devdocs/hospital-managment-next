@@ -1,5 +1,4 @@
 
-
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Controller, FieldValues } from 'react-hook-form'
@@ -19,6 +18,7 @@ import { GeneralInputType } from './types';
                    {fieldLabel}
                   </FieldLabel>
                   <Input
+                  
                     {...field}
                     {...props}
                     id={fieldName}

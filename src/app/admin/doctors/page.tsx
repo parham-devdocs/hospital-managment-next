@@ -1,8 +1,8 @@
+import { auth } from '@clerk/nextjs/server'
+
+const doctorList =async () => {
 
 
-import React from 'react'
-
-const doctorList = () => {
   return (
     <div>doctorList</div>
   )
