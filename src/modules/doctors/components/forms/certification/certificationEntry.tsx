@@ -45,61 +45,67 @@ const CertificationEntry = ({
         </div>
 
         <FieldGroup>
-          {/* Certification Name */}
-          <Controller
-            name={`certifications.${index}.name`}
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`cert-name-${index}`}>Certification Name</FieldLabel>
-                <Input
-                  {...field}
-                  id={`cert-name-${index}`}
-                  placeholder="e.g., ACLS"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
-            )}
-          />
+          {/* Row 1: Name, Issuing Org, Certification Number – 3 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Certification Name */}
+            <Controller
+              name={`certifications.${index}.name`}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`cert-name-${index}`}>Certification Name</FieldLabel>
+                  <Input
+                    {...field}
+                    id={`cert-name-${index}`}
+                    placeholder="e.g., ACLS"
+                    aria-invalid={fieldState.invalid}
+                    className="w-full"
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
 
-          {/* Issuing Organization */}
-          <Controller
-            name={`certifications.${index}.issuingOrganization`}
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`cert-org-${index}`}>Issuing Organization</FieldLabel>
-                <Input
-                  {...field}
-                  id={`cert-org-${index}`}
-                  placeholder="e.g., American Heart Association"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
-            )}
-          />
+            {/* Issuing Organization */}
+            <Controller
+              name={`certifications.${index}.issuingOrganization`}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`cert-org-${index}`}>Issuing Organization</FieldLabel>
+                  <Input
+                    {...field}
+                    id={`cert-org-${index}`}
+                    placeholder="e.g., American Heart Association"
+                    aria-invalid={fieldState.invalid}
+                    className="w-full"
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
 
-          {/* Certification Number */}
-          <Controller
-            name={`certifications.${index}.certificationNumber`}
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`cert-number-${index}`}>Certification Number</FieldLabel>
-                <Input
-                  {...field}
-                  id={`cert-number-${index}`}
-                  placeholder="e.g., 12345-67890"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
-            )}
-          />
+            {/* Certification Number */}
+            <Controller
+              name={`certifications.${index}.certificationNumber`}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`cert-number-${index}`}>Certification Number</FieldLabel>
+                  <Input
+                    {...field}
+                    id={`cert-number-${index}`}
+                    placeholder="e.g., 12345-67890"
+                    aria-invalid={fieldState.invalid}
+                    className="w-full"
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
+          </div>
 
-          {/* Dates – side by side */}
+          {/* Row 2: Dates – 2 columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Date Obtained */}
             <Controller
@@ -112,7 +118,7 @@ const CertificationEntry = ({
                     date={field.value}
                     setDate={(newDate) => field.onChange(newDate)}
                     placeholder="Select date obtained"
-                    className={fieldState.invalid ? "border-red-500" : ""}
+                    className={fieldState.invalid ? "border-red-500 w-full" : "w-full"}
                   />
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                 </Field>
@@ -130,7 +136,7 @@ const CertificationEntry = ({
                     date={field.value}
                     setDate={(newDate) => field.onChange(newDate)}
                     placeholder="Select expiry date"
-                    className={fieldState.invalid ? "border-red-500" : ""}
+                    className={fieldState.invalid ? "border-red-500 w-full" : "w-full"}
                   />
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                 </Field>

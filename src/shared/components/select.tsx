@@ -1,5 +1,4 @@
-// components/GenderSelect.tsx
-import { useForm, Controller, Control } from "react-hook-form";
+import { Controller, FieldValues} from "react-hook-form";
 import {
   Select as ShadSelect,
   SelectContent,
@@ -7,30 +6,33 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormData } from "@/src/modules/doctors/validations";
-interface SelectItem {
-  value: string;
-  label: string;
-}
-interface GenderSelectProps {
-  control: Control<FormData>;
-  selectItems: SelectItem[];
-}
+import { SelectionProps } from "../types";
+import { Field, FieldLabel } from "@/components/ui/field";
 
-const GenderSelect = ({ control, selectItems }: GenderSelectProps) => {
+
+const Selection = ({ control, selectItems, name, placeholder = "Select..."  }: SelectionProps) => {
   return (
     <Controller
-      name="gender" // field name (must match your schema)
+      name={name}
       control={control}
+      
       render={({ field }) => (
-        <ShadSelect onValueChange={field.onChange} defaultValue={field.value}>
+        <ShadSelect
+          value={field.value} 
+          onValueChange={field.onChange}
+          
+          
+        >  
+  
           <SelectTrigger>
-            <SelectValue placeholder="Select gender" />
+            <SelectValue placeholder={placeholder} />
           </SelectTrigger>
-          <SelectContent>
-            {selectItems.map((s) => {
-              return <SelectItem value={s.value}>{s.label}</SelectItem>;
-            })}
+          <SelectContent defaultValue={selectItems[0].value}>
+            {selectItems.map((s) => (
+              <SelectItem key={s.value} value={s.value}>
+                {s.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </ShadSelect>
       )}
@@ -38,4 +40,4 @@ const GenderSelect = ({ control, selectItems }: GenderSelectProps) => {
   );
 };
 
-export default GenderSelect;
+export default Selection;

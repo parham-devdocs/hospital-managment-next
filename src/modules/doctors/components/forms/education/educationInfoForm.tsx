@@ -32,7 +32,7 @@ const EducationInfoForm = ({form}:FormTypeProps) => {
   };
 
   return (
-    <div>
+    <div className="border border-gray-200 rounded-lg p-5 mb-4 bg-white shadow-sm">
       <div className="text-center w-full mb-8">
         <h3 className="text-2xl font-bold text-blue-600">Educational Info</h3>
         <div className="w-16 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />

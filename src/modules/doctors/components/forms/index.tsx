@@ -7,6 +7,7 @@ import { GeneralInfoForm } from "./generalInfoForm";
 import { Button } from "@/components/ui/button";
 import EducationInfoForm from "./education/educationInfoForm";
 import CertificationForm from "./certification/certificationForm";
+import WorkExperienceForm from "./workExperience/workExperieneForm";
 
 export const defaultValues: FormData = {
   fullName: "",
@@ -64,7 +65,7 @@ const CreateDoctorForm = () => {
       {/* Pass the form methods as a prop */}
       <GeneralInfoForm form={form} />
       <EducationInfoForm form={form} />
-      {/* <WorkExperienceForm form={form} /> */}
+      <WorkExperienceForm form={form} />
       <CertificationForm form={form} />
 
       <Button type="submit" onClick={()=>onSubmit} >Submit</Button>

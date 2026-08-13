@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import Selection from "@/src/shared/components/select";
+import { countries } from "@/src/app/data";
 
 interface EducationEntryProps {
   index: number;
@@ -25,9 +27,9 @@ const EducationEntry = ({
   canRemove,
   control,
 }: EducationEntryProps) => {
-  const { fields, append, remove } = useFieldArray<FormData, "educations", never>({
+  const { fields, append, remove } = useFieldArray({
     control,
-    name: `educations.${index}.honors` as any
+    name: `educations.${index}.honors` as any,
   });
 
   return (
@@ -49,83 +51,89 @@ const EducationEntry = ({
         </div>
 
         <FieldGroup>
-          {/* Medical School */}
-          <Controller
-            name={`educations.${index}.medicalSchool`}
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`med-school-${index}`}>Medical School</FieldLabel>
-                <Input
-                  {...field}
-                  id={`med-school-${index}`}
-                  placeholder="e.g., Harvard"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
-            )}
-          />
+          {/* Row 1: Medical School & Graduation Year – 2 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Controller
+              name={`educations.${index}.medicalSchool`}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`med-school-${index}`}>Medical School</FieldLabel>
+                  <Input
+                    {...field}
+                    id={`med-school-${index}`}
+                    placeholder="e.g., Harvard"
+                    aria-invalid={fieldState.invalid}
+                    className="w-full"
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
 
-          {/* Graduation Year */}
-          <Controller
-            name={`educations.${index}.graduationYear`}
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`grad-year-${index}`}>Graduation Year</FieldLabel>
-                <Input
-                  {...field}
-                  id={`grad-year-${index}`}
-                  placeholder="e.g., 2020"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
-            )}
-          />
+            <Controller
+              name={`educations.${index}.graduationYear`}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`grad-year-${index}`}>Graduation Year</FieldLabel>
+                  <Input
+                    {...field}
+                    id={`grad-year-${index}`}
+                    placeholder="e.g., 2020"
+                    aria-invalid={fieldState.invalid}
+                    className="w-full"
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
+          </div>
 
-          {/* Country */}
-          <Controller
-            name={`educations.${index}.country`}
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`country-${index}`}>Country</FieldLabel>
-                <Input
-                  {...field}
-                  id={`country-${index}`}
-                  placeholder="e.g., United States"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
-            )}
-          />
+          {/* Row 2: Country & Degree – 2 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Country – using Selection with proper label */}
+            <Controller
+              name={`educations.${index}.country`}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`country-${index}`}>Country</FieldLabel>
+                  <Selection
+                    name={`educations.${index}.country`}
+                    control={control as any}
+                    placeholder="Select country"
+                    selectItems={countries}
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
 
-          {/* Degree */}
-          <Controller
-            name={`educations.${index}.degree`}
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`degree-${index}`}>Degree</FieldLabel>
-                <Input
-                  {...field}
-                  id={`degree-${index}`}
-                  placeholder="e.g., MD, PhD"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
-            )}
-          />
+            <Controller
+              name={`educations.${index}.degree`}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`degree-${index}`}>Degree</FieldLabel>
+                  <Input
+                    {...field}
+                    id={`degree-${index}`}
+                    placeholder="e.g., MD, PhD"
+                    aria-invalid={fieldState.invalid}
+                    className="w-full"
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
+          </div>
 
-          {/* Honors (nested array) */}
+          {/* Row 3: Honors – full width, nested array */}
           <div>
             <FieldLabel>Honors</FieldLabel>
             {fields.map((honorField, honorIndex) => (
-              <div key={honorIndex} className="flex items-center gap-2 mt-2">
+              <div key={honorField.id} className="flex items-center gap-2 mt-2">
                 <Controller
                   name={`educations.${index}.honors.${honorIndex}`}
                   control={control}
@@ -135,6 +143,7 @@ const EducationEntry = ({
                         {...field}
                         placeholder="e.g., Cum Laude"
                         aria-invalid={fieldState.invalid}
+                        className="w-full"
                       />
                       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                     </Field>
@@ -143,7 +152,7 @@ const EducationEntry = ({
                 <button
                   type="button"
                   onClick={() => remove(honorIndex)}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-red-500 hover:text-red-700 shrink-0"
                   disabled={fields.length === 1}
                 >
                   <X size={16} />
