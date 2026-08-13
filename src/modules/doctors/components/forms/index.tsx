@@ -63,7 +63,7 @@ const CreateDoctorForm = () => {
     <form onSubmit={form.handleSubmit(onSubmit,onError)}>
       {/* Pass the form methods as a prop */}
       <GeneralInfoForm form={form} />
-      {/* <EducationInfoForm form={form} /> */}
+      <EducationInfoForm form={form} />
       {/* <WorkExperienceForm form={form} /> */}
       <CertificationForm form={form} />
 

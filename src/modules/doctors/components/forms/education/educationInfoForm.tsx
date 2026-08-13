@@ -4,12 +4,13 @@ import { Control, useFieldArray, useFormContext } from "react-hook-form";
 import EducationEntry from "./educationEntry";
 import { Plus } from "lucide-react";
 import {FormData  } from "../../../validations/index";
+import { FormTypeProps } from "../../../types";
 interface EducationFormProps {
   control: Control<FormData>;
   errors?: any; // optional
 }
-const EducationInfoForm = ({errors,control}:EducationFormProps) => {
- 
+const EducationInfoForm = ({form}:FormTypeProps) => {
+ const {control}=form
   
   const {
     fields,
@@ -44,7 +45,6 @@ const EducationInfoForm = ({errors,control}:EducationFormProps) => {
           control={control}
           onRemove={() => remove(index)}
           canRemove={fields.length > 1}
-          errors={errors}
         />
       ))}
 

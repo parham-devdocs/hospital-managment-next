@@ -1,9 +1,11 @@
 // workExperience/workExperienceEntry.tsx
 "use client";
-import { Control, useFieldArray, useFormContext } from "react-hook-form";
-import Input from "@/src/shared/components/form/controllers/general";
+import { Control, Controller, useFieldArray, useFormContext } from "react-hook-form";
 import { X, Plus } from "lucide-react";
 import { FormData } from "../../../validations";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { DatePicker } from "@/src/shared/components/date-picker";
 
 interface WorkExperienceEntryProps {
   index: number;
@@ -13,15 +15,14 @@ interface WorkExperienceEntryProps {
   errors?:any
 }
 
-const WorkExperienceEntry = ({ index, onRemove, canRemove ,errors}: WorkExperienceEntryProps) => {
-    const { register } = useFormContext(); // ✅ gets control from context
+const WorkExperienceEntry = ({ index, onRemove, canRemove ,control}: WorkExperienceEntryProps) => {
 
   const {
     fields: responsibilityFields,
     append: appendResponsibility,
     remove: removeResponsibility,
   } = useFieldArray({
-    name: `workExperience.${index}.responsibilities`,
+    name: `workExperiences.${index}.responsibilities`,
   });
 
   return (
@@ -40,40 +41,77 @@ const WorkExperienceEntry = ({ index, onRemove, canRemove ,errors}: WorkExperien
           </button>
         )}
       </div>
+      {/* export interface WorkExperienceItem{
+    hospital: string,
+    startDate: Date,
+    endDate: Date,
+    location: string,
+    position: string,
+    responsibilities: string[]
+  } */}
 
       <div className="space-y-4">
-        <Input
-          {...register(`workExperiences.${index}.hospital`)}
-          fieldLabel="Hospital / Organization"
-          fieldName={`workExperiences.${index}.hospital`}
-          placeHolder="e.g., Mayo Clinic"
-        />
-        <Input
-          {...register(`workExperiences.${index}.position`)}
-          fieldLabel="Position"
-          fieldName={`workExperiences.${index}.position`}
-          placeHolder="e.g., Resident"
-        />
-        <Input
-          {...register(`workExperiences.${index}.location`)}
-          fieldLabel="Location"
-          fieldName={`workExperiences.${index}.location`}
-          placeHolder="e.g., Rochester, MN"
-        />
-        <div className="grid grid-cols-2 gap-4">
-          <Input
-            {...register(`workExperiences.${index}.startDate`)}
-            fieldLabel="Start Date"
-            fieldName={`workExperiences.${index}.startDate`}
-            inputType="date"
+      <Controller
+            name={`workExperiences.${index}.hospital`}
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={`med-school-${index}`}>Hospital</FieldLabel>
+                <Input
+                  {...field}
+                  id={`med-school-${index}`}
+                  placeholder="e.g., Harvard"
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+              </Field>
+            )}
           />
-          <Input
-            {...register(`workExperiences.${index}.endDate`)}
-            fieldLabel="End Date"
-            fieldName={`workExperiences.${index}.endDate`}
-            inputType="date"
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Date Obtained */}
+            <Controller
+            name={`workExperiences.${index}.startDate`}
+            control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`cert-date-${index}`}>Start Date</FieldLabel>
+                  <DatePicker
+                    date={field.value}
+                    setDate={(newDate) => field.onChange(newDate)}
+                    placeholder="Select start date"
+                    className={fieldState.invalid ? "border-red-500" : ""}
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
+           <Controller
+            name={`workExperiences.${index}.endDate`}
+            control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={`cert-date-${index}`}>End Date</FieldLabel>
+                  <DatePicker
+                    date={field.value}
+                    setDate={(newDate) => field.onChange(newDate)}
+                    placeholder="Select start date"
+                    className={fieldState.invalid ? "border-red-500" : ""}
+                  />
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </Field>
+              )}
+            />
+             <Controller
+            name={`educations.${index}.medicalSchool`}
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={`med-school-${index}`}>Medical School</FieldLabel>
+                <Sele
+                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+              </Field>
+            )}
           />
-        </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">

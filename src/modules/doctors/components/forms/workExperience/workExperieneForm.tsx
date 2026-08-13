@@ -7,13 +7,14 @@ import { FormData } from "../../../validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { workExperienceSchema } from "../../../validations/workExperienceSchema";
 import { defaultValues } from "../../forms/index";
+import { FormTypeProps } from "../../../types";
 interface WorkExperienceFormProps {
   control: Control<FormData>;
   errors?: any; // optional
 }
-const WorkExperienceForm = () => {
-  const { control,formState:{errors} } = useFormContext<FormData>(); // ✅ gets control from context
+const WorkExperienceForm = ({form}:FormTypeProps) => {
 
+  const {control}=form
   const {
     fields,
     append,
@@ -46,7 +47,6 @@ const WorkExperienceForm = () => {
       {fields.map((field, index) => (
         <WorkExperienceEntry
         control={control}
-        errors={errors}
           key={field.id}
           index={index}
           onRemove={() => remove(index)}
