@@ -34,6 +34,7 @@ export interface TextAreaProps<T extends FieldValues> {
     control: Control<T>; 
     fieldName:Path<T>
     fieldLabel:string
+    placeHolder:string
     props?:any
   
   }

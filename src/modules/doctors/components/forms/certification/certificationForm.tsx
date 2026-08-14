@@ -5,10 +5,7 @@ import { Plus } from "lucide-react";
 import { FormData } from "../../../validations";
 import { FormTypeProps } from "../../../types";
 
-interface CertificationFormProps {
-    control: Control<FormData>;
-    errors?: any; 
-  }
+
 const CertificationForm = ({form}:FormTypeProps) => {
 const {control}=form
   const {

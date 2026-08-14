@@ -11,6 +11,7 @@ import WorkExperienceForm from "./workExperience/workExperieneForm";
 import { useCreateDoctor } from "../../api/hooks/create-doctor.query";
 import { mockDoctorData } from "../../mocks";
 import { SpecialtyForm } from "./specialty/specialtyForm";
+import BioForm from "./bio";
 
 // CreateDoctorForm.tsx
 export const defaultValues: FormData = {
@@ -76,10 +77,11 @@ const CreateDoctorForm = () => {
     <form onSubmit={form.handleSubmit(onSubmit, onError)}>
       <GeneralInfoForm form={form} />
       <SpecialtyForm form={form}/>
+      <BioForm form={form}/>
       <EducationInfoForm form={form} />
       <WorkExperienceForm form={form} />
       <CertificationForm form={form} />
-
+       
      <Button type="submit">Submit</Button>
 
       {/* Optional: show error */}
