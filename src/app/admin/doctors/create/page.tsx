@@ -4,7 +4,8 @@ import CreateDoctorScreen from '@/src/modules/doctors/screens/createDoctor.scree
 import Header from '@/src/shared/components/header'
 import { Stethoscope } from 'lucide-react'
 
-const page = () => {
+const page =async () => {
+
   return (
     <div className=' space-y-6' >
         <Header title='Create Doctor' icon={<Stethoscope/>}/>

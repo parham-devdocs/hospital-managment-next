@@ -9,6 +9,7 @@ import Sidebar from "../shared/components/sidebar";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { auth } from "@clerk/nextjs/server";
+import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,7 +53,10 @@ export default async function RootLayout({
                   <AdminNavbar />
                   <main className="flex-1 overflow-y-auto overflow-x-hidden">
                     <div className="p-6">
+                      <Providers>
                       {children}
+
+                      </Providers>
                     </div>
                   </main>
                 </div>

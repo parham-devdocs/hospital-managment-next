@@ -33,7 +33,7 @@ export function GeneralInfoForm({ form }: FormTypeProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Full Name */}
             <Controller
-              name="fullName"
+              name="user.fullName"
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -52,7 +52,7 @@ export function GeneralInfoForm({ form }: FormTypeProps) {
 
             {/* Email */}
             <Controller
-              name="email"
+              name="user.email" // ✅ fixed
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -72,7 +72,7 @@ export function GeneralInfoForm({ form }: FormTypeProps) {
 
             {/* Password */}
             <Controller
-              name="password"
+              name="user.password" // ✅ fixed
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -93,7 +93,7 @@ export function GeneralInfoForm({ form }: FormTypeProps) {
 
           {/* Row 2: Address – full width */}
           <Controller
-            name="address"
+            name="user.address" // ✅ fixed
             control={control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
@@ -114,7 +114,7 @@ export function GeneralInfoForm({ form }: FormTypeProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {/* Phone Number */}
             <Controller
-              name="phoneNumber"
+              name="user.phoneNumber" // ✅ fixed
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -133,7 +133,7 @@ export function GeneralInfoForm({ form }: FormTypeProps) {
 
             {/* Age – convert to number */}
             <Controller
-              name="age"
+              name="user.age" // ✅ fixed
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -154,7 +154,7 @@ export function GeneralInfoForm({ form }: FormTypeProps) {
 
             {/* Gender – shadcn Select */}
             <Controller
-              name="gender"
+              name="user.gender" // ✅ fixed
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>

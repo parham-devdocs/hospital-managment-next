@@ -8,15 +8,23 @@ import { Button } from "@/components/ui/button";
 import EducationInfoForm from "./education/educationInfoForm";
 import CertificationForm from "./certification/certificationForm";
 import WorkExperienceForm from "./workExperience/workExperieneForm";
+import { useCreateDoctor } from "../../api/hooks/create-doctor.query";
+import { mockDoctorData } from "../../mocks";
+import { SpecialtyForm } from "./specialty/specialtyForm";
 
+// CreateDoctorForm.tsx
 export const defaultValues: FormData = {
-  fullName: "",
-  email: "",
-  password: "",
-  address: "",
-  phoneNumber: "",
-  age: 18,
-  gender: "male" as const,
+  user: { // ✅ Now wrapped in "user"
+    fullName: "",
+    email: "",
+    password: "",
+    address: "",
+    phoneNumber: "",
+    age: 18,
+    gender: "male" as const,
+
+  },
+      bio:"",
   educations: [
     {
       medicalSchool: "",
@@ -48,27 +56,34 @@ export const defaultValues: FormData = {
 };
 
 const CreateDoctorForm = () => {
+  // ✅ Hook called at top level
+  const { mutate, isError, error } = useCreateDoctor();
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("✅ Submitted:", data);
+    mutate(data); // ✅ Pass the form data to mutate
   };
-  
+
   const onError = (errors: any) => {
     console.log("❌ Validation errors:", errors);
   };
+
   return (
-    <form onSubmit={form.handleSubmit(onSubmit,onError)}>
-      {/* Pass the form methods as a prop */}
+    <form onSubmit={form.handleSubmit(onSubmit, onError)}>
       <GeneralInfoForm form={form} />
+      <SpecialtyForm form={form}/>
       <EducationInfoForm form={form} />
       <WorkExperienceForm form={form} />
       <CertificationForm form={form} />
 
-      <Button type="submit" onClick={()=>onSubmit} >Submit</Button>
+     <Button type="submit">Submit</Button>
+
+      {/* Optional: show error */}
+      {isError && <div className="text-red-500">Error: {error?.message}</div>}
     </form>
   );
 };

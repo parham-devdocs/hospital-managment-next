@@ -35,6 +35,14 @@ export interface EducationItem {
     gender:"male"|"female"
   }
 
+  export interface Doctor{
+workExperiences:WorkExperienceItem[]
+certifications:CertificationItem[]
+educations:EducationItem[]
+user:GeneralInfo
+
+  }
+
   export interface FormTypeProps {
     form: UseFormReturn<FormData>; // 👈 use the same type as parent
   }

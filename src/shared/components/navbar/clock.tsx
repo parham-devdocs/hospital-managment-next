@@ -17,7 +17,10 @@ const ClockComp = () => {
       return () => clearInterval(timer);
     }, []);
   return (
-<div className="hidden lg:flex items-center gap-1.5 px-2 py-1 rounded-md bg-muted/50 text-xs text-muted-foreground font-mono">
+<div className="hidden lg:flex items-center gap-1.5 px-2 py-1 rounded-md bg-muted/50 text-xs text-muted-foreground font-mono"
+      suppressHydrationWarning 
+
+>
               <Clock className="h-3 w-3" />
               {formatTime(currentTime)}
             </div>  )

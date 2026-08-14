@@ -10,12 +10,8 @@ import {
 import { 
   ChevronDown, 
   User, 
-  Settings, 
   LogOut, 
   Shield,
-  Users,
-  CreditCard,
-  HelpCircle,
   UserCog
 } from 'lucide-react'
 import React from 'react'
@@ -24,7 +20,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const Name = () => {
   const { user, isLoaded, isSignedIn } = useUser()
-  const { session } = useSession()
 
   // Get user claims/roles
   const getInitials = () => {
@@ -36,7 +31,7 @@ const Name = () => {
 
   const getUserRole = () => {
     // Check for custom claims from your metadata
-    const role = user?.publicMetadata?.role || user?.privateMetadata?.role
+    const role = user?.publicMetadata?.role 
     
     if (role === 'admin') return { label: 'Administrator', icon: Shield, color: 'text-purple-500' }
     if (role === 'manager') return { label: 'Manager', icon: UserCog, color: 'text-blue-500' }
