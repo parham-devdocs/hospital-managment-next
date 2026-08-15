@@ -9,9 +9,8 @@ import EducationInfoForm from "./education/educationInfoForm";
 import CertificationForm from "./certification/certificationForm";
 import WorkExperienceForm from "./workExperience/workExperieneForm";
 import { useCreateDoctor } from "../../api/hooks/create-doctor.query";
-import { mockDoctorData } from "../../mocks";
-import { SpecialtyForm } from "./specialty/specialtyForm";
 import BioForm from "./bio";
+import { SpecialtyForm } from "./specialty/specialtyForm";
 
 // CreateDoctorForm.tsx
 export const defaultValues: FormData = {
@@ -25,11 +24,12 @@ export const defaultValues: FormData = {
     gender: "male" as const,
 
   },
+  specialties:[{name:""}],
       bio:"",
   educations: [
     {
       medicalSchool: "",
-      graduationYear: "",
+      graduationYear:2000,
       country: "",
       degree: "",
       honors: [""],

@@ -12,7 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import Selection from "@/src/shared/components/select";
-import { countries } from "@/src/app/data";
+import { countries, generateYears } from "@/src/app/data";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface EducationEntryProps {
   index: number;
@@ -25,7 +26,7 @@ const EducationEntry = ({
   index,
   onRemove,
   canRemove,
-  control,
+  control
 }: EducationEntryProps) => {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -58,7 +59,9 @@ const EducationEntry = ({
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={`med-school-${index}`}>Medical School</FieldLabel>
+                  <FieldLabel htmlFor={`med-school-${index}`}>
+                    Medical School
+                  </FieldLabel>
                   <Input
                     {...field}
                     id={`med-school-${index}`}
@@ -66,28 +69,35 @@ const EducationEntry = ({
                     aria-invalid={fieldState.invalid}
                     className="w-full"
                   />
-                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
                 </Field>
               )}
             />
 
-            <Controller
-              name={`educations.${index}.graduationYear`}
-              control={control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={`grad-year-${index}`}>Graduation Year</FieldLabel>
-                  <Input
-                    {...field}
-                    id={`grad-year-${index}`}
-                    placeholder="e.g., 2020"
-                    aria-invalid={fieldState.invalid}
-                    className="w-full"
-                  />
-                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                </Field>
-              )}
-            />
+
+<Controller
+  name={`educations.${index}.graduationYear`}
+  control={control}
+  render={({ field }) => (
+    <Select
+      value={field.value?.toString()}   // shadcn expects string for display
+      onValueChange={(val) => field.onChange(Number(val))}  // 👈 convert to number
+    >
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder="1995" />
+      </SelectTrigger>
+      <SelectContent>
+        {generateYears().map((year) => (
+          <SelectItem key={year.value} value={year.value.toString()}>
+            {year.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  )}
+/>
           </div>
 
           {/* Row 2: Country & Degree – 2 columns */}
@@ -104,8 +114,11 @@ const EducationEntry = ({
                     control={control as any}
                     placeholder="Select country"
                     selectItems={countries}
+                    
                   />
-                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
                 </Field>
               )}
             />
@@ -123,7 +136,9 @@ const EducationEntry = ({
                     aria-invalid={fieldState.invalid}
                     className="w-full"
                   />
-                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
                 </Field>
               )}
             />
@@ -145,7 +160,9 @@ const EducationEntry = ({
                         aria-invalid={fieldState.invalid}
                         className="w-full"
                       />
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />

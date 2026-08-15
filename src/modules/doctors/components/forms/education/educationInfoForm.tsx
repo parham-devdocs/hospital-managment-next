@@ -24,7 +24,7 @@ const EducationInfoForm = ({form}:FormTypeProps) => {
   const addEducation = () => {
     append({
       medicalSchool: "",
-      graduationYear: "",
+      graduationYear: 2000,
       country: "",
       degree: "",
       honors: [""],

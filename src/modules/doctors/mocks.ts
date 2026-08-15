@@ -2,6 +2,7 @@
 import { FormData } from "./validations";
 
 export const mockDoctorData: FormData = {
+  specialties:[{name:"cardiology"}],
   user: {
     fullName: "Dr. Sarah Johnson",
     email: "sarah.johnson@hospital.com",
@@ -16,7 +17,7 @@ export const mockDoctorData: FormData = {
   educations: [
     {
       medicalSchool: "Harvard Medical School",
-      graduationYear: "2015",
+      graduationYear: 2015,
       country: "USA",
       degree: "MD - Doctor of Medicine",
       honors: [
@@ -27,7 +28,7 @@ export const mockDoctorData: FormData = {
     },
     {
       medicalSchool: "Stanford University School of Medicine",
-      graduationYear: "2011",
+      graduationYear: 2011,
       country: "USA",
       degree: "BS in Biology (Pre-Med)",
       honors: ["Dean's List", "Phi Beta Kappa"],

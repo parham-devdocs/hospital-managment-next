@@ -3,7 +3,7 @@ import { FormData } from "./validations";
 
 export interface EducationItem {
     medicalSchool:string
-    graduationYear: string;
+    graduationYear: number;
     country: string;
     degree: string;
     honors: string[];

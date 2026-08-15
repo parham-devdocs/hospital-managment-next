@@ -262,3 +262,21 @@ export const doctorSpecialties: { value: string; label: string }[] = [
   { value: "Pediatric Surgery", label: "Pediatric Surgery" },
   { value: "Pediatric Urology", label: "Pediatric Urology" },
 ];
+
+// lib/utils/generate-years.ts
+
+export const generateYears = (yearsBack: number = 70): { value: string; label: string }[] => {
+  const currentYear = new Date().getFullYear();
+  const startYear = currentYear - yearsBack;
+  const years: { value: string; label: string }[] = [];
+
+  for (let year = currentYear; year >= startYear; year--) {
+    years.push({
+      value: year.toString(),
+      label: year.toString(),
+    });
+  }
+
+  return years;
+};
+

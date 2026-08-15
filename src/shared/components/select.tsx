@@ -18,18 +18,16 @@ const Selection = ({ control, selectItems, name, placeholder = "Select..."  }: S
       
       render={({ field }) => (
         <ShadSelect
-          value={field.value} 
-          onValueChange={field.onChange}
-          
-          
-        >  
+  value={field.value} 
+  onValueChange={ field.onChange}
+> 
   
           <SelectTrigger>
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
-          <SelectContent defaultValue={selectItems[0].value}>
+          <SelectContent defaultValue={selectItems[0].value} >
             {selectItems.map((s) => (
-              <SelectItem key={s.value} value={s.value}>
+              <SelectItem key={s.value} value={s.value} >
                 {s.label}
               </SelectItem>
             ))}
