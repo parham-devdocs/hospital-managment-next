@@ -9,7 +9,7 @@ import { TableCellCompProps } from './types';
 
 const TableCellComp = ({ 
     children,
-    type, 
+    type="string", 
     badge = false, 
     compact = false,
     className = '',

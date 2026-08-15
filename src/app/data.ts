@@ -1,3 +1,5 @@
+import { TableColumn } from "../shared/components/table/types";
+
 export const countries: { value: string; label: string }[] = [
     { value: "Afghanistan", label: "Afghanistan" },
     { value: "Albania", label: "Albania" },
@@ -280,3 +282,70 @@ export const generateYears = (yearsBack: number = 70): { value: string; label: s
   return years;
 };
 
+
+
+export const doctorTableColumns: TableColumn[] = [
+  {
+    key: 'fullName',
+    label: 'Doctor Name',
+    className: 'font-medium text-gray-900',
+    align: 'left',
+    sortable: true,
+  },
+  {
+    key: 'email',
+    label: 'Email',
+    align: 'left',
+    sortable: true,
+  },
+  {
+    key: 'phoneNumber',
+    label: 'Phone',
+    align: 'left',
+    sortable: false,
+  },
+  {
+    key: 'gender',
+    label: 'Gender',
+    align: 'center',
+    sortable: false,
+  },
+  {
+    key: 'specialties',
+    label: 'Specialties',
+    align: 'left',
+    sortable: false,
+    // Note: In the render function, you'd handle the array.
+  },
+  {
+    key: 'certificationCount',
+    label: 'Certs',
+    align: 'center',
+    sortable: true,
+  },
+  {
+    key: 'educationCount',
+    label: 'Edu',
+    align: 'center',
+    sortable: true,
+  },
+  {
+    key: 'workExperienceCount',
+    label: 'Experience (Yrs)',
+    align: 'center',
+    sortable: true,
+  },
+  {
+    key: 'isActive',
+    label: 'Status',
+    align: 'center',
+    sortable: true,
+  },
+  {
+    key: 'actions', // Custom key, no direct mapping in data
+    label: 'Actions',
+    align: 'right',
+    sortable: false,
+    className: 'w-40',
+  },
+];

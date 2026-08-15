@@ -1,4 +1,5 @@
 // mock-data.ts
+import { DoctorResponse } from "./types";
 import { FormData } from "./validations";
 
 export const mockDoctorData: FormData = {
@@ -86,3 +87,72 @@ export const mockDoctorData: FormData = {
     },
   ],
 };
+
+
+export const mockDoctorsReponse: DoctorResponse[] = [
+  {
+    id: '1',
+    fullName: 'Dr. Sarah Johnson',
+    email: 'p.fftrvdvdgfbfgggggdp@hospital.com', // Long email to test maxLength
+    phoneNumber: '+15551234567',
+    gender: 'female',
+    avatarUrl: null,
+    isActive: true,
+    specialties: ['NerPhology', 'Neurology'],
+    certificationCount: 3,
+    educationCount: 2,
+    workExperienceCount: 8,
+  },
+  {
+    id: '2',
+    fullName: 'Dr. James Carter',
+    email: 'james.carter@healthcare.org',
+    phoneNumber: '+12223334444',
+    gender: 'male',
+    avatarUrl: 'https://i.pravatar.cc/150?img=11',
+    isActive: false,
+    specialties: ['Cardiology'],
+    certificationCount: 5,
+    educationCount: 3,
+    workExperienceCount: 12,
+  },
+  {
+    id: '3',
+    fullName: 'Dr. Emily Nguyen',
+    email: 'emily.nguyen@medicalgroup.com',
+    phoneNumber: '+13334445555',
+    gender: 'female',
+    avatarUrl: null,
+    isActive: true,
+    specialties: ['Pediatrics', 'Neonatology', 'Immunology'], // Multiple specialties
+    certificationCount: 2,
+    educationCount: 2,
+    workExperienceCount: 4,
+  },
+  {
+    id: '4',
+    fullName: 'Dr. Michael Okafor',
+    email: 'michael.o@longdomainnamehospitalenterprise.co.uk',
+    phoneNumber: '+14445556666',
+    gender: 'male',
+    avatarUrl: 'https://i.pravatar.cc/150?img=20',
+    isActive: true,
+    specialties: ['Orthopedics'],
+    certificationCount: 4,
+    educationCount: 1,
+    workExperienceCount: 6,
+  },
+  {
+    id: '5',
+    fullName: 'Dr. Priya Sharma',
+    email: 'priya.sharma@clinic.com',
+    phoneNumber: '+15556667777',
+    gender: 'female',
+    avatarUrl: null,
+    isActive: false,
+    specialties: ['Dermatology', 'Cosmetology'],
+    certificationCount: 1,
+    educationCount: 1,
+    workExperienceCount: 2,
+  },
+];

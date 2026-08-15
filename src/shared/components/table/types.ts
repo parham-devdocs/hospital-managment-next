@@ -5,7 +5,7 @@ export interface ImageAvatarCompProps{className?:string,imageUrl?:string,fallbac
 
 export interface TableCellCompProps {
     children: string | number | Date;
-    type: 'date' | 'string' | 'number' | 'currency' | 'percentage' | "image"
+    type?: 'date' | 'string' | 'number' | 'currency' | 'percentage' | "image"
     badge?: boolean;
     compact?: boolean;
     className?: string; 

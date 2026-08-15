@@ -1,10 +1,11 @@
+import DoctorList from '@/src/modules/doctors/screens/doctorList'
 import { auth } from '@clerk/nextjs/server'
 
 const doctorList =async () => {
 
 
   return (
-    <div>doctorList</div>
+    <div><DoctorList/></div>
   )
 }
 

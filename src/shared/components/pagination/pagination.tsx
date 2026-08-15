@@ -11,7 +11,7 @@ import { PaginationProps } from "./types"
   
 
   
-  const PaginationComp = ({pageCount,activePage}:PaginationProps) => {
+  const PaginationComp = ({pageCount,activePage,url}:PaginationProps) => {
     return (
 <Pagination >
   <PaginationContent>
@@ -21,14 +21,14 @@ import { PaginationProps } from "./types"
   
   {Array.from({length:pageCount}).map((_,index)=>{
      return  <PaginationItem key={index} >
-      <PaginationLink href={`/admin/doctors?page=${index+1}`} isActive={index+1===activePage}>{index+1}</PaginationLink>
+      <PaginationLink href={`/${url}?page=${index+1}`} isActive={index+1===activePage}>{index+1}</PaginationLink>
     </PaginationItem>
   })}
     <PaginationItem>
       <PaginationEllipsis />
     </PaginationItem>
     <PaginationItem>
-      <PaginationNext href={`/admin/doctors?page=${activePage+1}`} />
+      <PaginationNext href={`/${url}?page=${activePage+1}`} />
     </PaginationItem>
   </PaginationContent>
 </Pagination>

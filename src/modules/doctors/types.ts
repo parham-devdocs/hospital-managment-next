@@ -46,3 +46,19 @@ user:GeneralInfo
   export interface FormTypeProps {
     form: UseFormReturn<FormData>; // 👈 use the same type as parent
   }
+
+
+// mockDoctors.ts
+export interface DoctorResponse {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  gender: 'male' | 'female' | 'other';
+  avatarUrl: string | null;
+  isActive: boolean;
+  specialties: string[];
+  certificationCount: number;
+  educationCount: number;
+  workExperienceCount: number;
+}
