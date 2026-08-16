@@ -5,10 +5,11 @@ import ActionButtons from './actionButtons';
 import { getDoctorsService } from '../../api/services/get-all-doctors.service';
 import { DoctorSearchParams } from '@/src/shared/types';
 import { parsePaginationParams } from '@/src/shared/lib/pagination';
+import { DoctorResponse } from '../../types';
 
-const index =async ({page,limit,fullName,isActive,specialties}:DoctorSearchParams) => {
-const {safeLimit,safePage}=parsePaginationParams(page,limit)
-const doctors=await getDoctorsService({page:safePage,specialties,isActive,limit:safeLimit,fullName})
+const index =async ({doctors}:{doctors:DoctorResponse[]}) => {
+
+
   return (
     <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">  
 
@@ -27,7 +28,7 @@ const doctors=await getDoctorsService({page:safePage,specialties,isActive,limit:
           </TableRow>
         </TableHeader>
         <TableBody>
-          {doctors.data.data.map((doctor) => (
+          {doctors.map((doctor) => (
             <TableRow
               key={doctor.id}
               className="odd:bg-gray-50/60 hover:bg-gray-100/80 transition-colors duration-150 border-b border-gray-100 last:border-0"

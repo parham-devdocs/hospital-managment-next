@@ -1,6 +1,7 @@
 "use server";
 import { apiClient } from "@/src/shared/lib/api/api-client";
-import { DoctorResponse, GetDoctorQueriesType } from "../../types";
+import { Doctor, DoctorResponse, GetDoctorQueriesType } from "../../types";
+import { PaginatedApiResponse } from "@/src/shared/types";
 
 export const getDoctorsService = async ({
   page = 1,
@@ -29,7 +30,7 @@ export const getDoctorsService = async ({
   }
 
   // Return the promise directly (async function allows this)
-  return await apiClient.get<{ data: DoctorResponse[]; total: number }>(
+  return await apiClient.get<PaginatedApiResponse<DoctorResponse>>(
     `/doctor?${params.toString()}`
   );
 };

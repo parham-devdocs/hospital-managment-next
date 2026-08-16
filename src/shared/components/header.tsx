@@ -6,10 +6,11 @@ interface HeaderProps {
   title: string;
   subtitle?: string;
   className?: string;
+  totalItems?: number;
   icon: React.ReactNode;
 }
 
-function Header({ title, subtitle, className, icon }: HeaderProps) {
+function Header({ title, subtitle, totalItems, className, icon }: HeaderProps) {
   return (
     <div
       className={cn(
@@ -47,13 +48,18 @@ function Header({ title, subtitle, className, icon }: HeaderProps) {
               <ChevronRight className="h-5 w-5 text-muted-foreground/50" />
             )}
           </div>
+          {totalItems && (
+            <p>
+              found : {totalItems} items
+            </p>
+          )}
 
           {subtitle && (
             <div className="flex items-center gap-2">
               <div className="h-0.5 w-6 rounded bg-primary/40" />
-              <p className="text-sm text-muted-foreground/80 md:text-base">
-                {subtitle}
-              </p>
+              <span className="ml-2 text-sm font-normal text-muted-foreground">
+                ({totalItems} total)
+              </span>
             </div>
           )}
         </div>
