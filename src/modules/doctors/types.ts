@@ -62,3 +62,15 @@ export interface DoctorResponse {
   educationCount: number;
   workExperienceCount: number;
 }
+
+
+export type GetDoctorQueriesType = {
+  page?: number;
+  limit?: number;
+  fullName?: string;
+  specialties?: string[];
+  isActive?: boolean;
+};
+export interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}

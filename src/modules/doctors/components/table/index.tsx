@@ -1,10 +1,14 @@
 import { doctorTableColumns } from '@/src/app/data';
 import TableCellComp from '@/src/shared/components/table/tableCell';
 import { Table, TableBody, TableHeader, TableRow} from '@/components/ui/table';
-import { mockDoctorsReponse } from '../../mocks';
 import ActionButtons from './actionButtons';
+import { getDoctorsService } from '../../api/services/get-all-doctors.service';
+import { DoctorSearchParams } from '@/src/shared/types';
+import { parsePaginationParams } from '@/src/shared/lib/pagination';
 
-const index = () => {
+const index =async ({page,limit,fullName,isActive,specialties}:DoctorSearchParams) => {
+const {safeLimit,safePage}=parsePaginationParams(page,limit)
+const doctors=await getDoctorsService({page:safePage,specialties,isActive,limit:safeLimit,fullName})
   return (
     <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">  
 
@@ -23,7 +27,7 @@ const index = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {mockDoctorsReponse.map((doctor) => (
+          {doctors.data.data.map((doctor) => (
             <TableRow
               key={doctor.id}
               className="odd:bg-gray-50/60 hover:bg-gray-100/80 transition-colors duration-150 border-b border-gray-100 last:border-0"

@@ -30,3 +30,14 @@ export interface SelectionProps {
   selectItems: { value: string; label: string }[];
   placeholder?: string;
 }
+
+
+export interface DoctorSearchParams {
+  page?: string;
+  limit?:string;
+  specialties?:string[];
+  fullName?:string;
+  isActive?:boolean
+ 
+
+}

@@ -1,21 +1,14 @@
-import { apiClient } from "@/src/shared/lib/api/doctors/api-client";
-import { Doctor } from "../../types";
+"use server";
+import { apiClient } from "@/src/shared/lib/api/api-client";
+import { DoctorResponse, GetDoctorQueriesType } from "../../types";
 
-type GetDoctorQueries = {
-  page?: number;
-  limit?: number;
-  fullName?: string;
-  specialties?: string[];
-  isActive?: boolean;
-};
-
-export const getDoctorService = ({
+export const getDoctorsService = async ({
   page = 1,
   limit = 10,
   fullName,
   specialties,
   isActive,
-}: GetDoctorQueries = {}) => {
+}: GetDoctorQueriesType = {}) => {
   const params = new URLSearchParams();
 
   params.append("page", String(page));
@@ -26,7 +19,7 @@ export const getDoctorService = ({
   }
 
   if (specialties && specialties.length > 0) {
-    specialties.forEach((spec) => {
+    specialties.forEach((spec: string) => {
       params.append("specialties[]", spec);
     });
   }
@@ -35,8 +28,8 @@ export const getDoctorService = ({
     params.append("isActive", String(isActive));
   }
 
-  // Return the promise directly – no try-catch, no async/await
-  return apiClient.get<{ data: Doctor[]; total: number }>(
+  // Return the promise directly (async function allows this)
+  return await apiClient.get<{ data: DoctorResponse[]; total: number }>(
     `/doctor?${params.toString()}`
   );
 };
