@@ -9,7 +9,7 @@ import CertificationComp from "./cetrificaion";
 
 export default function DoctorProfile({ data }: { data: Doctor }) {
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-2xl border border-primary-100 my-8 space-y-5">
+    <div className=" w-full mx-auto p-6 bg-white shadow-xl rounded-2xl border border-primary-100 my-8 space-y-5">
       <GeneralInfo generalInfo={data.user} />
 
       {/* Educations */}

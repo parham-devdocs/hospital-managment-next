@@ -35,13 +35,13 @@ const GeneralInfo = ({ generalInfo }: { generalInfo: GeneralInfo }) => {
             <div className="flex items-center gap-2 mt-1">
               <span
                 className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                  generalInfo.iaActive
+                  generalInfo.isActive
                     ? "bg-green-100 text-green-700"
                     : "bg-gray-100 text-gray-600"
                 }`}
               >
                 <BadgeCheck className="w-3 h-3" />
-                {generalInfo.iaActive ? "Active" : "Inactive"}
+                {generalInfo.isActive ? "Active" : "Inactive"}
               </span>
             </div>
           </div>
