@@ -4,15 +4,11 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { ItemType } from ".";
 import { Filter } from "lucide-react";
-import { usePathname } from "next/navigation";
 
 export function DropdownMenuContentComp({
   items,
