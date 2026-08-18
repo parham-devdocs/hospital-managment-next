@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EventsSidebarComp = ({date,doctorId}) => {
+const EventsSidebarComp = () => {
 
   return (
     <div>EventsSidebar</div>

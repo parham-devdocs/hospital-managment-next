@@ -4,7 +4,7 @@ import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
 import boundariesPlugin from 'eslint-plugin-boundaries';
-
+import clerkNext from '@clerk/eslint-plugin/next'
 export default tseslint.config(
   // IGNORE these folders
   {
@@ -31,6 +31,7 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       boundaries: boundariesPlugin,
+      '@clerk/next': clerkNext
     },
     settings: {
       'boundaries/elements': [
@@ -44,7 +45,13 @@ export default tseslint.config(
     rules: {
       // React Hooks rules
       ...reactHooks.configs.recommended.rules,
-
+      '@clerk/next/require-auth-protection': [
+        'error',
+        {
+          protected: ['**'],
+          public: ['src/app/admin/auth/sign-in/**', 'src/app/**'],
+        },
+      ],
      
 
       // Module Boundaries rules

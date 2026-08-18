@@ -18,7 +18,7 @@ export default async function AppointmentScreen({
           <CustomCalendarComp />
         </div>
         <div className="lg:col-span-1">
-          <EventsSidebarComp date={date ?? ""} doctorId={+slug} />
+          <EventsSidebarComp  />
         </div>
       </div>
     );

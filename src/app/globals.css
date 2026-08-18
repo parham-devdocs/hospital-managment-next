@@ -178,6 +178,9 @@
       radial-gradient(circle at 10% 20%, oklch(0.45 0.14 255 / 0.4) 0%, transparent 50%),
       radial-gradient(circle at 90% 80%, oklch(0.40 0.14 252 / 0.3) 0%, transparent 50%);
   }
+  .card-container {
+    @apply relative w-full overflow-hidden space-y-2 py-4 px-5 rounded-xl shadow-md transition-all bg-white border border-primary/10 hover:shadow-lg;
+  }
 }
 
 @keyframes fadeIn {
@@ -233,3 +236,4 @@
   border-radius: 10px; 
 }
 ::-webkit-scrollbar-thumb:hover { background:var(--primary); }
+
