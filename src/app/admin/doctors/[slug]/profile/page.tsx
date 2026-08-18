@@ -1,5 +1,4 @@
 
-import { notFound } from "next/navigation";
 
 type DoctorPageProps = {
   params: Promise<{ slug: string }>;
