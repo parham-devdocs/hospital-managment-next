@@ -30,8 +30,10 @@ export interface EducationItem {
     email:string
     password:string
     address:string
-    phoneNumber:string
     age:number
+    phoneNumber:string
+    avatarUrl?:string
+    isActive?:boolean
     gender:"male"|"female"
   }
 

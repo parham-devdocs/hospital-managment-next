@@ -13,9 +13,9 @@ export interface Pagination{
   currentPage: number, perPage: number, totalItems: number, totalPages: number
 
 }
-export interface PaginatedApiResponse<T>{
+export interface ApiResponse<T>{
 
-data:T[]
+data:T
 pagination: Pagination
 status:number 
 
