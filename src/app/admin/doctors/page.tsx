@@ -10,6 +10,18 @@ const doctorList = async ({
 }) => {
   const {page,limit,specialties,fullName,isActive}=await  searchParams
   console.log('Received searchParams:',await  searchParams);
+  let specialtiesArray: string[] | undefined;
+  if (specialties && typeof specialties==="string") {
+    try {
+      const parsed = JSON.parse(specialties);
+      if (Array.isArray(parsed)) {
+        specialtiesArray = parsed;
+      }
+    } catch {
+      // If not valid JSON, treat as single value? Or ignore.
+    }
+  }
+
   return (
     <div>
       <DoctorList 
@@ -17,7 +29,7 @@ const doctorList = async ({
     limit={limit}
     isActive={isActive}
 fullName={fullName}
-specialties={specialties}
+specialties={specialtiesArray}
       />
     </div>
   );

@@ -7,8 +7,8 @@ export const getDoctorsService = async ({
   page = 1,
   limit = 10,
   fullName,
-  specialties,
   isActive,
+  specialties
 }: GetDoctorQueriesType = {}) => {
   const params = new URLSearchParams();
 
