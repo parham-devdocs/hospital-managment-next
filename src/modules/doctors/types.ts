@@ -50,7 +50,7 @@ user:GeneralInfo
 
 // mockDoctors.ts
 export interface DoctorResponse {
-  id: string;
+  doctorId: string;
   fullName: string;
   email: string;
   phoneNumber: string;

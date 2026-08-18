@@ -2,14 +2,11 @@ import { doctorTableColumns } from '@/src/app/data';
 import TableCellComp from '@/src/shared/components/table/tableCell';
 import { Table, TableBody, TableHeader, TableRow} from '@/components/ui/table';
 import ActionButtons from './actionButtons';
-import { getDoctorsService } from '../../api/services/get-all-doctors.service';
-import { DoctorSearchParams } from '@/src/shared/types';
-import { parsePaginationParams } from '@/src/shared/lib/pagination';
 import { DoctorResponse } from '../../types';
 
 const index =async ({doctors}:{doctors:DoctorResponse[]}) => {
 
-
+console.log(doctors)
   return (
     <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">  
 
@@ -30,7 +27,7 @@ const index =async ({doctors}:{doctors:DoctorResponse[]}) => {
         <TableBody>
           {doctors.map((doctor) => (
             <TableRow
-              key={doctor.id}
+              key={doctor.doctorId}
               className="odd:bg-gray-50/60 hover:bg-gray-100/80 transition-colors duration-150 border-b border-gray-100 last:border-0"
             >
               <TableCellComp>{doctor.fullName}</TableCellComp>
@@ -50,7 +47,7 @@ const index =async ({doctors}:{doctors:DoctorResponse[]}) => {
               <TableCellComp badge>
                 {doctor.isActive ? 'Active' : 'Inactive'}
               </TableCellComp>
-            <ActionButtons/>
+            <ActionButtons doctorId={doctor.doctorId}/>
             </TableRow>
           ))}
         </TableBody>

@@ -11,6 +11,7 @@ import WorkExperienceForm from "./workExperience/workExperieneForm";
 import { useCreateDoctor } from "../../api/hooks/create-doctor.query";
 import BioForm from "./bio";
 import { SpecialtyForm } from "./specialty/specialtyForm";
+import { useRouter } from "next/navigation";
 
 // CreateDoctorForm.tsx
 export const defaultValues: FormData = {
@@ -58,6 +59,7 @@ export const defaultValues: FormData = {
 
 const CreateDoctorForm = () => {
   // ✅ Hook called at top level
+  const router=useRouter()
   const { mutate, isError, error } = useCreateDoctor();
 
   const form = useForm<FormData>({
@@ -66,7 +68,11 @@ const CreateDoctorForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    mutate(data); // ✅ Pass the form data to mutate
+    mutate(data, {
+      onSuccess: () => {
+        router.push("/admin/doctors");
+      }
+    });
   };
 
   const onError = (errors: any) => {

@@ -91,7 +91,7 @@ export const mockDoctorData: FormData = {
 
 export const mockDoctorsReponse: DoctorResponse[] = [
   {
-    id: '1',
+    doctorId: '1',
     fullName: 'Dr. Sarah Johnson',
     email: 'p.fftrvdvdgfbfgggggdp@hospital.com', // Long email to test maxLength
     phoneNumber: '+15551234567',
@@ -104,7 +104,7 @@ export const mockDoctorsReponse: DoctorResponse[] = [
     workExperienceCount: 8,
   },
   {
-    id: '2',
+    doctorId: '2',
     fullName: 'Dr. James Carter',
     email: 'james.carter@healthcare.org',
     phoneNumber: '+12223334444',
@@ -117,7 +117,7 @@ export const mockDoctorsReponse: DoctorResponse[] = [
     workExperienceCount: 12,
   },
   {
-    id: '3',
+    doctorId: '3',
     fullName: 'Dr. Emily Nguyen',
     email: 'emily.nguyen@medicalgroup.com',
     phoneNumber: '+13334445555',
@@ -130,7 +130,7 @@ export const mockDoctorsReponse: DoctorResponse[] = [
     workExperienceCount: 4,
   },
   {
-    id: '4',
+    doctorId: '4',
     fullName: 'Dr. Michael Okafor',
     email: 'michael.o@longdomainnamehospitalenterprise.co.uk',
     phoneNumber: '+14445556666',
@@ -143,7 +143,7 @@ export const mockDoctorsReponse: DoctorResponse[] = [
     workExperienceCount: 6,
   },
   {
-    id: '5',
+    doctorId: '5',
     fullName: 'Dr. Priya Sharma',
     email: 'priya.sharma@clinic.com',
     phoneNumber: '+15556667777',
