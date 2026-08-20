@@ -14,6 +14,8 @@ import {
   Eye,
   Pencil,
   Trash2,
+  Calendar,
+  CalendarCheck2,
 } from "lucide-react";
 import Link from "next/link";
 import DeleteModal from "./deleteModal";
@@ -42,6 +44,19 @@ const ActionButtons = ({ doctorId }: { doctorId: string }) => {
                 <Link href={`/admin/doctors/${doctorId}`}>
                   <Eye className="mr-2 h-4 w-4" />
                   Details
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={`/admin/doctors/${doctorId}/timeSlots`}>
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Available times
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <Link href={`/admin/doctors/${doctorId}/appointments`}>
+                  <CalendarCheck2 className="mr-2 h-4 w-4" />
+                  Appointments
                 </Link>
               </DropdownMenuItem>
 
