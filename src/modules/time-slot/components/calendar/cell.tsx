@@ -8,14 +8,13 @@ import {
 } from "@/components/ui/popover";
 
 const Cell = ({
-  color, // Background color (optional, from parent)
-  events=0, // Array of events or count
-  dayNumber, // The day number to display (or empty string for padding)
-  date, // Full Date object (for today detection)
-  isSelected, // Boolean for selected day
-  onClick, // Click handler
+  color,
+  events=0, 
+  dayNumber,
+  date,
+  isSelected, 
+  onClick, 
 }:{color:string,events:number,dayNumber:number,date:Date,isSelected:boolean,onClick:()=>void}) => {
-  // Determine if this day is today
   const isCurrentDay = date && isToday(date);
 
   // Default background if not provided

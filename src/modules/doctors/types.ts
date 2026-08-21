@@ -76,3 +76,4 @@ export type GetDoctorQueriesType = {
 export interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
+

@@ -1,4 +1,4 @@
-import { TimeSlotsScreen } from "@/src/modules/doctors/screens/timeSlots"
+import { TimeSlotsScreen } from "@/src/modules/time-slot/screens/displayTimeSlots"
 
 const page = () => {
   return (
