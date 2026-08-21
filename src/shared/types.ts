@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { Control, FieldValues, Path } from "react-hook-form";
 
 export interface PageProps{
@@ -41,3 +42,22 @@ export interface DoctorSearchParams {
  
 
 }
+
+
+
+export type UseCalendarReturnType<T> = {
+  // State values
+  selectedDay: Date | null;       
+  currentMonth: Date;          
+  events: T[];                   
+
+  setSelectedDay: Dispatch<SetStateAction<Date | null>>;
+  setCurrentMonth: Dispatch<SetStateAction<Date>>;
+
+  year: number;
+  month: number;
+  days: number;
+
+  goToNextMonth: () => void;
+  goToPreviousMonth: () => void;
+};

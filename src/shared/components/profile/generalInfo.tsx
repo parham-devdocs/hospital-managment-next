@@ -8,7 +8,11 @@ const GeneralInfo = ({ generalInfo }: { generalInfo: GeneralInfo }) => {
   const avatar = generalInfo.gender === "male" ? maleFigure : femaleFigure;
 
   return (
+<<<<<<< HEAD
     <div className="card-container shadow-sm overflow-hidden">
+=======
+    <div className=" card-container shadow-sm overflow-hidden">
+>>>>>>> 15278f38c7cc53b315ee58594d9fc5415167ecd9
       {/* Top accent bar */}
       <div className="h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600" />
 
@@ -47,6 +51,7 @@ const GeneralInfo = ({ generalInfo }: { generalInfo: GeneralInfo }) => {
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Details Grid - Black background with white text */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Email */}
@@ -80,11 +85,51 @@ const GeneralInfo = ({ generalInfo }: { generalInfo: GeneralInfo }) => {
             <div className="flex items-start gap-3 bg-black text-white rounded-xl px-4 py-3 shadow-sm md:col-span-2 min-w-0 hover:bg-gray-800 transition-colors">
               <MapPin className="w-4 h-4 text-primary-400 shrink-0 mt-0.5" />
               <span className="truncate font-medium text-sm" title={generalInfo.address}>
+=======
+        {/* Details Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm">
+          {/* Email */}
+          <div className="flex items-center gap-3 bg-black text-white max-w-fit rounded-md px-2 py-1">
+            <Mail className="w-4 h-4 text-primary-500" />
+            <span className="truncate">{generalInfo.email}</span>
+          </div>
+
+          {/* Phone */}
+          <div className="flex items-center gap-3 bg-black text-white max-w-fit rounded-md px-2 py-1">
+            <Phone className="w-4 h-4 text-primary-500" />
+            <span>{generalInfo.phoneNumber}</span>
+          </div>
+
+          {/* Gender */}
+          <div className="flex items-center gap-3 bg-black text-white max-w-fit rounded-md px-2 py-1">
+            <User className="w-4 h-4 text-primary-500" />
+            <span className="capitalize">{generalInfo.gender}</span>
+          </div>
+
+          {/* Age */}
+          {generalInfo.age && (
+            <div className="flex items-center gap-3 bg-black text-white max-w-fit rounded-md px-2 py-1">
+              <Calendar className="w-4 h-4 text-primary-500" />
+              <span>{generalInfo.age} years old</span>
+            </div>
+          )}
+
+          {/* Address – spans full width if needed */}
+          {generalInfo.address && (
+            <div className="flex items-start gap-3  md:col-span-2 bg-black text-white max-w-fit rounded-md px-2 py-1">
+              <MapPin className="w-4 h-4 text-primary-500 shrink-0 mt-0.5" />
+              <span title={generalInfo.address} className="truncate">
+>>>>>>> 15278f38c7cc53b315ee58594d9fc5415167ecd9
                 {generalInfo.address}
               </span>
             </div>
           )}
         </div>
+<<<<<<< HEAD
+=======
+
+        {/* Optional: add a bottom divider or action buttons here */}
+>>>>>>> 15278f38c7cc53b315ee58594d9fc5415167ecd9
       </div>
     </div>
   );

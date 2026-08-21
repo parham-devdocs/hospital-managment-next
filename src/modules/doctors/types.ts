@@ -31,7 +31,10 @@ export interface EducationItem {
     password:string
     address:string
     age:number
+<<<<<<< HEAD
     phoneNumber:string
+=======
+>>>>>>> 15278f38c7cc53b315ee58594d9fc5415167ecd9
     avatarUrl?:string
     isActive?:boolean
     gender:"male"|"female"
@@ -76,3 +79,4 @@ export type GetDoctorQueriesType = {
 export interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
+

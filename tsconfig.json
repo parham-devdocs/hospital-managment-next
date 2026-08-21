@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/modules/time-slot/components/calendar/calenda.jest.js", "next.config.ts", "jest.setup.ts"  ],
   "exclude": ["node_modules"]
 }
