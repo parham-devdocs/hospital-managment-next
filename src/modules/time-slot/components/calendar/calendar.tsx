@@ -4,6 +4,7 @@ import Controllers from "./controllers";
 import { TimeSlot } from "../../types";
 import { UseCalendarReturnType } from "@/src/shared/types";
 import { useDayTimeSlots } from "../../store/dayTimeSlots";
+import useCalendarDays from "../../hooks/useCalendarDays";
 
 const CalendarGrid = ({
   currentMonth,
@@ -16,6 +17,8 @@ const CalendarGrid = ({
   month,
 }: UseCalendarReturnType<TimeSlot>) => {
   const {setSlots}=useDayTimeSlots()
+  const daysData=useCalendarDays({selectedDay,days,month,year,events})
+
   const colors = [
     "bg-red-200",
     "bg-orange-200",
@@ -33,40 +36,20 @@ const CalendarGrid = ({
         currentMonth={currentMonth}
       />
       <div className="grid grid-cols-6 gap-2">
-        {Array.from({ length: days }).map((_, index) => {
-          const dayNumber = index + 1;
-          const cellDate = new Date(year, month, dayNumber);
-          const color = colors[index % 6];
-          const isSelected = selectedDay
-            ? selectedDay.getFullYear() === year &&
-              selectedDay.getMonth() === month &&
-              selectedDay.getDate() === dayNumber
-            : false;
-
-          // Filter events for this day
-          const dayEvents = events.filter((event) => {
-            const eventDate = new Date(event.startingTime);
-            if (!eventDate) return false;
-            return (
-              eventDate.getFullYear() === year &&
-              eventDate.getMonth() === month &&
-              eventDate.getDate() === dayNumber
-            );
-          });
-          const eventCount = dayEvents.length;
+        {daysData.map((d, index) => {
           return (
             <Cell
               key={index}
-              dayNumber={dayNumber}
-              date={cellDate}
-              color={color}
-              isSelected={isSelected}
+              dayNumber={d.dayNumber}
+              date={d.date}
+              color={d.color}
+              isSelected={d.isSelected}
               onClick={() => {
-                setSelectedDay(cellDate);
-                setSlots(dayEvents)
+                setSelectedDay(d.date);
+                setSlots(d.dayEvents)
 
               }}
-              events={eventCount}
+              events={d.eventCount}
             />
           );
         })}
