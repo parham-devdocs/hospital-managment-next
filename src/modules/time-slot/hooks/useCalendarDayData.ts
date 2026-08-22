@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { TimeSlot } from '../types';
+import { useMemo } from "react";
+import { TimeSlot } from "../types";
 
 interface DayData {
   dayNumber: number;
@@ -7,20 +7,31 @@ interface DayData {
   color: string;
   isSelected: boolean;
   eventCount: number;
-  dayEvents:TimeSlot[]
+  dayEvents: TimeSlot[];
 }
 
-interface useCalendarDaysProps{
-year: number 
-month: number
-days: number
- events: TimeSlot[]
-  selectedDay: Date | null
+interface useCalendarDaysProps {
+  year: number;
+  month: number;
+  days: number;
+  events: TimeSlot[];
+  selectedDay: Date | null;
 }
-const useCalendarDays = (
-  {year,days,month,events,selectedDay}:useCalendarDaysProps
-): DayData[] => {
-  const colors = ["bg-red-200", "bg-orange-200", "bg-yellow-200", "bg-green-200", "bg-blue-200", "bg-purple-200"];
+const useCalendarDayData = ({
+  year,
+  days,
+  month,
+  events,
+  selectedDay,
+}: useCalendarDaysProps): DayData[] => {
+  const colors = [
+    "bg-red-200",
+    "bg-orange-200",
+    "bg-yellow-200",
+    "bg-green-200",
+    "bg-blue-200",
+    "bg-purple-200",
+  ];
 
   return useMemo(() => {
     return Array.from({ length: days }).map((_, index) => {
@@ -54,4 +65,4 @@ const useCalendarDays = (
   }, [year, month, days, events, selectedDay]);
 };
 
-export default useCalendarDays;
+export default useCalendarDayData;

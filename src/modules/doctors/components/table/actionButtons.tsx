@@ -21,7 +21,7 @@ import Link from "next/link";
 import DeleteModal from "./deleteModal";
 
 const ActionButtons = ({ doctorId }: { doctorId: string }) => {
-  console.log({doctorId})
+  console.log({ doctorId });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -30,20 +30,16 @@ const ActionButtons = ({ doctorId }: { doctorId: string }) => {
         <div className="flex justify-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-              >
+              <Button variant="ghost" size="icon" className="h-8 w-8">
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuItem asChild>
-                <Link href={`/admin/doctors/${doctorId}`}>
-                  <Eye className="mr-2 h-4 w-4" />
-                  Details
+                <Link href={`/admin/doctors/${doctorId}/timeSlots`}>
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Schedule
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>

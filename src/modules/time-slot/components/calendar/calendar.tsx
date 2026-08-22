@@ -4,7 +4,7 @@ import Controllers from "./controllers";
 import { TimeSlot } from "../../types";
 import { UseCalendarReturnType } from "@/src/shared/types";
 import { useDayTimeSlots } from "../../store/dayTimeSlots";
-import useCalendarDays from "../../hooks/useCalendarDays";
+import useCalendarDays from "../../hooks/useCalendarDayData";
 
 const CalendarGrid = ({
   currentMonth,
@@ -16,17 +16,8 @@ const CalendarGrid = ({
   events = [], // default to empty array
   month,
 }: UseCalendarReturnType<TimeSlot>) => {
-  const {setSlots}=useDayTimeSlots()
-  const daysData=useCalendarDays({selectedDay,days,month,year,events})
-
-  const colors = [
-    "bg-red-200",
-    "bg-orange-200",
-    "bg-yellow-200",
-    "bg-green-200",
-    "bg-blue-200",
-    "bg-purple-200",
-  ];
+  const { setSlots,setDayDate } = useDayTimeSlots();
+  const daysData = useCalendarDays({ selectedDay, days, month, year, events });
 
   return (
     <div className="w-full h-full p-4">
@@ -46,8 +37,8 @@ const CalendarGrid = ({
               isSelected={d.isSelected}
               onClick={() => {
                 setSelectedDay(d.date);
-                setSlots(d.dayEvents)
-
+                setSlots(d.dayEvents);
+                setDayDate(d.date)
               }}
               events={d.eventCount}
             />

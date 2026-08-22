@@ -1,11 +1,8 @@
 "use client"
-import { useParams } from "next/navigation";
 import { TimeSlotsCalendar } from "../components/calendar";
 import TimeSlotList from "../components/timeSlotsList";
-import { TimeSlot } from "../types";
 import Header from "@/src/shared/components/header";
 import { Calendar } from "lucide-react";
-import { useTimeSlots } from "../api/hooks/getTimeSlots";
 
 
 
@@ -21,7 +18,7 @@ const TimeslotsScreen = () => {
             <TimeSlotsCalendar />
           </div>
           <div className="flex-[1]">
-            <TimeSlotList  selectedDate={new Date()} />
+            <TimeSlotList  />
           </div>
         </div>
       </div>

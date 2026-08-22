@@ -2,11 +2,10 @@ import { LucideIcon } from "lucide-react";
 
 export interface MenuItem {
   title: string;
-  badge?: string;
-  isActive: boolean;
   url: string;
-  Icon: LucideIcon;
-  handleNavigation: () => void;
+  isActive?:boolean
+  icon: LucideIcon;
+  handleNavigation?: () => void;
 }
 
 

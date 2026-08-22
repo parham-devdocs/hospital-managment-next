@@ -3,32 +3,26 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { TimeSlot } from "../../types";
-import { Button } from "@/components/ui/button";
 import { formatDate } from "@/src/shared/lib/formatDate";
 import { TimeSlotCard } from "./card";
 import { Clock, CalendarDays, CalendarX } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { useDayTimeSlots } from "../../store/dayTimeSlots";
 
 interface TimeSlotListProps {
-  selectedDate: Date; // ✅ ADD THIS: Pass the selected day from the parent
   onReserve?: (id: string) => void;
   onEdit?: (id: string) => void;
   onDelete?: (id: string) => void;
 }
 
 const TimeSlotList = ({
-  selectedDate, // ✅ Receive it here
   onReserve,
   onEdit,
   onDelete,
 }: TimeSlotListProps) => {
-  const { slots } = useDayTimeSlots();
+  const { slots,dayDate } = useDayTimeSlots();
 
   const handleSlotClick = (id: string) => {
     console.log("Clicked time slot with ID:", id);
@@ -54,7 +48,7 @@ const TimeSlotList = ({
               <CardDescription className="flex items-center gap-3 mt-1.5 text-sm text-gray-500">
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
-                  {formatDate(selectedDate)} {/* ✅ Safe: Always shows the selected day */}
+                  {formatDate(dayDate)} {/* ✅ Safe: Always shows the selected day */}
                 </span>
                 <span className="w-px h-4 bg-gray-200" />
                 <span className="font-medium text-gray-700">
@@ -79,7 +73,7 @@ const TimeSlotList = ({
                 No slots available
               </p>
               <p className="text-xs text-gray-400 mt-1 max-w-[200px]">
-                There are no time slots scheduled for {formatDate(selectedDate)}.
+                There are no time slots scheduled for {formatDate(dayDate)}.
               </p>
             </div>
           ) : (

@@ -5,10 +5,9 @@ import { usePathname } from "next/navigation";
 
 import Header from "./header";
 import SidebarMenuItemComp from "./sidebarMenuItem";
-import Event from "./event";
 import Footer from "./footer";
-import { getNavItemsByRole } from "./navItems";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarRail, useSidebar } from "@/components/ui/sidebar";
+import { NavItems } from "./navItems";
 
 // Navigation items for patient (hardcoded)
 const events = [
@@ -57,7 +56,6 @@ export default function AppSidebar({
   const userAvatar = user?.avatar || "";
   const userEmail = user?.email || "";
   const userRole = user?.role || "patient";
-  const navItems = getNavItemsByRole(userRole);
 
   return (
     <Sidebar collapsible="icon" className="border-r">
@@ -73,7 +71,7 @@ export default function AppSidebar({
           </SidebarGroupLabel>
 
           <SidebarMenu className="space-y-1">
-            {navItems.map((item) => {
+            {NavItems.map((item) => {
               const isActive =
                 pathname === item.url || pathname.startsWith(item.url + "/");
               return (
@@ -82,9 +80,8 @@ export default function AppSidebar({
                   isActive={isActive}
                   title={item.title}
                   url={item.url}
-                  Icon={item.icon}
+                  icon={item.icon}
                   handleNavigation={handleNavigation}
-                  badge={item.badge}
                 />
               );
             })}
@@ -92,7 +89,6 @@ export default function AppSidebar({
         </SidebarGroup>
 
         {/* Today's Date */}
-        <Event open={open} events={customEvents} />
       </SidebarContent>
 
       {/* Footer with User Profile */}
