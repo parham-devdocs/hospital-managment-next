@@ -1,8 +1,7 @@
-import { TimeSlotsScreen } from "@/src/modules/time-slot/screens/displayTimeSlots"
-
+import TimeslotsScreen, {  } from "@/src/modules/time-slot/screens/timeslots.screen";
 const page = () => {
   return (
-    <div><TimeSlotsScreen/></div>
+    <div><TimeslotsScreen/></div>
   )
 }
 

@@ -1,9 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import CalendarGrid from "./index";
+import CalendarGrid from "./calendar";
 
-const mockEvents = [
-  { id: "1", startingTime: new Date(2026, 8, 15, 10, 0) },
-];
+const mockEvents = [{ id: "1", startingTime: new Date(2026, 8, 15, 10, 0) }];
 
 const mockProps = {
   currentMonth: new Date(2026, 8, 1),

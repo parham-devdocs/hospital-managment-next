@@ -42,7 +42,7 @@ const Cell = ({
         cursor-pointer
         select-none
       `}
-          onClick={onClick}
+          onClick={()=>onClick()}
         >
           <span className="text-lg font-medium">{dayNumber}</span>
 
