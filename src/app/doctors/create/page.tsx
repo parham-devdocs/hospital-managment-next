@@ -8,7 +8,6 @@ const page =async () => {
 
   return (
     <div className=' space-y-6' >
-        <Header title='Create Doctor' icon={<Stethoscope/>}/>
         <CreateDoctorScreen/>
     </div>
   )

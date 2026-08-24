@@ -9,11 +9,11 @@ import FilterComp from '../components/filter';
 
 
 
-const DoctorList = async ({ page, limit, fullName, isActive, specialties }: DoctorSearchParams) => {
+const DoctorList = async ({ page, limit, fullName, isActive, specialty}: DoctorSearchParams) => {
   const { safeLimit, safePage } = parsePaginationParams(page, limit);
   // Ensure boolean conversion if needed
   
-  const { data: { pagination, data }, status } = await  getDoctorsService({ page:safePage, limit:safeLimit, specialties, isActive, fullName });
+  const { data: { pagination, data }, status } = await  getDoctorsService({ page:safePage, limit:safeLimit, specialty, isActive, fullName });
   
   
   const { currentPage, totalItems, totalPages } = pagination;

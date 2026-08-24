@@ -70,7 +70,7 @@ const CreateDoctorForm = () => {
   const onSubmit: SubmitHandler<FormData> = (data) => {
     mutate(data, {
       onSuccess: () => {
-        router.push("/admin/doctors");
+        router.push("/doctors");
       }
     });
   };

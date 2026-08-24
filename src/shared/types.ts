@@ -36,7 +36,7 @@ export interface SelectionProps {
 export interface DoctorSearchParams {
   page?: string;
   limit?:string;
-  specialties?:string[];
+  specialty?:string;
   fullName?:string;
   isActive?:boolean
  

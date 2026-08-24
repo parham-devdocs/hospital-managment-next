@@ -37,20 +37,20 @@ const ActionButtons = ({ doctorId }: { doctorId: string }) => {
 
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuItem asChild>
-                <Link href={`/admin/doctors/${doctorId}/timeSlots`}>
+                <Link href={`/doctors/${doctorId}/timeSlots`}>
                   <Calendar className="mr-2 h-4 w-4" />
                   Schedule
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href={`/admin/doctors/${doctorId}/timeSlots`}>
+                <Link href={`/doctors/${doctorId}/timeSlots`}>
                   <Calendar className="mr-2 h-4 w-4" />
                   Available times
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
-                <Link href={`/admin/doctors/${doctorId}/appointments`}>
+                <Link href={`/doctors/${doctorId}/appointments`}>
                   <CalendarCheck2 className="mr-2 h-4 w-4" />
                   Appointments
                 </Link>

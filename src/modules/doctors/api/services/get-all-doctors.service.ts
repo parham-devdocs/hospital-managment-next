@@ -8,7 +8,7 @@ export const getDoctorsService = async ({
   limit = 10,
   fullName,
   isActive,
-  specialties
+  specialty
 }: GetDoctorQueriesType = {}) => {
   const params = new URLSearchParams();
 
@@ -19,10 +19,9 @@ export const getDoctorsService = async ({
     params.append("fullName", fullName);
   }
 
-  if (specialties && specialties.length > 0) {
-    specialties.forEach((spec: string) => {
-      params.append("specialties[]", spec);
-    });
+  if (specialty) {
+    params.append("specialty", specialty);
+
   }
 
   if (isActive !== undefined) {

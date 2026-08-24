@@ -70,7 +70,7 @@ export type GetDoctorQueriesType = {
   page?: number;
   limit?: number;
   fullName?: string;
-  specialties?: string[];
+  specialty?: string;
   isActive?: boolean;
 };
 export interface PageProps {
