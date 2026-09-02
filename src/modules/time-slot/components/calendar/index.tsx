@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import useCalendar from "@/src/shared/hooks/useCalendar";
 import CalendarGrid from "@/src/modules/time-slot/components/calendar/calendar";
 import { Loader2, AlertCircle, CalendarOff } from "lucide-react";
-import { useTimeSlots } from "../../api/hooks/getTimeSlots";
+import { useTimeSlots } from "../../api/hooks/useGetTimeSlots";
 import { TimeSlot } from "../../types";
 
 export function TimeSlotsCalendar() {

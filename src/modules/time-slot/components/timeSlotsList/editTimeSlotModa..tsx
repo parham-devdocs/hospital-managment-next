@@ -9,32 +9,28 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { DatePicker } from "@/src/shared/components/date-picker";
 import { Pen, X, Save } from "lucide-react";
+import { useUpdateTimeSlots } from "../../api/hooks/useUpdateTimeSlots";
 
 type EditTimeSlotModalType = {
   startTime: string;
-  endTime: string;
+  endTime:string
   id: string;
-  status: "Available" | "Reserved";
-  onSave?: (id: string, newStart: string, newEnd: string, newDate: Date) => void;
+ 
 };
 
 const EditTimeSlotModal = ({
   startTime,
   endTime,
-  id,
-  status,
-  onSave,
+  id
+
 }: EditTimeSlotModalType) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [newStart, setNewStart] = useState(startTime);
-  const [newEnd, setNewEnd] = useState(endTime);
-
+const {mutate}=useUpdateTimeSlots(id,startTime)
   const handleSave = () => {
-    onSave?.(id, newStart, newEnd, date);
+   mutate()
     setOpen(false);
   };
 

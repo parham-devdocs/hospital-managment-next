@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash2, X, AlertTriangle } from "lucide-react";
 import { useState } from "react";
+import { useDeleteTimeSlots } from "../../api/hooks/useDeleteTimeSlots";
 
 type DeleteTimeSlotModalType = {
   startTime: string;
@@ -26,11 +27,12 @@ const DeleteTimeSlotModal = ({
   status,
   onDelete,
 }: DeleteTimeSlotModalType) => {
+  const {mutate}=useDeleteTimeSlots(id)
   const [open, setOpen] = useState(false);
 
   const handleDelete = () => {
     onDelete?.(id);
-    
+    mutate()
     setOpen(false);
   };
 

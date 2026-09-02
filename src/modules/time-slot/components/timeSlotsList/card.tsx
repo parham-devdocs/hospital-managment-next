@@ -121,7 +121,7 @@ export function TimeSlotCard({
       <CardFooter className="flex justify-end gap-1 border-t border-gray-100/80 bg-gray-50/40 px-3 py-1.5">
       
       
-        <EditTimeSlotModal status={status} id={id} startTime={startTime} endTime={endTime}/>
+        <EditTimeSlotModal  id={id} startTime={startTime} endTime={endTime}/>
 
        <DeleteTimeSlotModal status={status} id={id} startTime={startTime} endTime={endTime}/>
       </CardFooter>

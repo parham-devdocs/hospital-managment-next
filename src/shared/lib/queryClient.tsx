@@ -13,7 +13,7 @@ import { toast } from "sonner";
               Math.min(1000 * 2 ** attemptIndex, 30000),
           },
           mutations: {
-            retry: 1,
+            retry: 3,
             retryDelay: (attemptIndex) =>
               Math.min(1000 * 2 ** attemptIndex, 30000),
             onError: (error) => {

@@ -1,16 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TimeSlot } from "../../types";
 import { updateTimeSlotsOfDoctorService } from "../services/updateTimeSlot";
+import { toast } from "sonner";
 
-export function useUpdateTimeSlots(timeSlotId: string, data: TimeSlot) {
+export function useUpdateTimeSlots(timeSlotId: string, startTime:string) {
   const queryClient = useQueryClient();
   
   const mutation = useMutation({
-    mutationFn: () => updateTimeSlotsOfDoctorService(timeSlotId, data),
+    mutationFn: () => updateTimeSlotsOfDoctorService(timeSlotId,startTime),
     onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['timeSlots'] });
-    },
+        queryClient.invalidateQueries({ queryKey: ['timeSlots'] });
+        toast("time slot deleted successfuly")
+      }
   });
 
   return mutation;
