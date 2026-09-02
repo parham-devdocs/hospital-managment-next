@@ -9,8 +9,10 @@ import {
 } from "@/components/ui/card";
 import { TimeSlot } from "../../types";
 import { format } from "date-fns";
-import { CalendarCheck, Pencil, Trash2, Clock } from "lucide-react";
+import {  Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import EditTimeSlotModal from "./editTimeSlotModa.";
+import DeleteTimeSlotModal from "./deleteTimeSlotModal";
 
 // Helper to style status badges (kept for the top-right pill)
 const statusConfig = {
@@ -49,9 +51,7 @@ export function TimeSlotCard({
   endingTime,
   doctorId,
   status,
-  onReserve,
-  onEdit,
-  onDelete,
+  
 }: TimeSlotCardProps) {
   // Format the date and times compactly
   const dateString = format(startingTime, "EEE, MMM dd");
@@ -118,41 +118,12 @@ export function TimeSlotCard({
         )}
       </CardContent>
 
-      {/* Card Footer — COMPACT, BUTTONS SMALLER, NO ANIMATION */}
       <CardFooter className="flex justify-end gap-1 border-t border-gray-100/80 bg-gray-50/40 px-3 py-1.5">
-        {/* Reserve Button */}
-        <Button
-          variant="default"
-          size="sm"
-          className="h-7 px-2.5 text-[10px] cursor-pointer font-medium gap-1 rounded-full bg-primary hover:bg-blue-700 text-white shadow-sm"
-          onClick={() => onReserve?.(id)}
-          disabled={status === "Reserved"}
-        >
-          <CalendarCheck className="w-3 h-3" />
-          Reserve
-        </Button>
+      
+      
+        <EditTimeSlotModal status={status} id={id} startTime={startTime} endTime={endTime}/>
 
-        {/* Edit Button */}
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-7 px-2.5 text-[10px] cursor-pointer font-medium gap-1 rounded-full border-gray-300 text-gray-600 hover:text-blue-600 hover:border-blue-300"
-          onClick={() => onEdit?.(id)}
-        >
-          <Pencil className="w-3 h-3" />
-          Edit
-        </Button>
-
-        {/* Delete Button */}
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-7 px-2.5 text-[10px] cursor-pointer font-medium gap-1 rounded-full border-gray-300 text-gray-600 hover:text-rose-600 hover:border-rose-300 hover:bg-rose-50"
-          onClick={() => onDelete?.(id)}
-        >
-          <Trash2 className="w-3 h-3" />
-          Delete
-        </Button>
+       <DeleteTimeSlotModal status={status} id={id} startTime={startTime} endTime={endTime}/>
       </CardFooter>
     </Card>
   );

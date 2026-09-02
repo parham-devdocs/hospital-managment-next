@@ -1,5 +1,5 @@
 import { getSingleDoctorService } from "@/src/modules/doctors/api/services/getSingleDoctor";
-import DoctorProfileScreen from "@/src/modules/doctors/screens/doctorProfile";
+import DoctorProfileScreen from "@/src/modules/doctors/screens/doctorProfile.screen";
 
 
 type DoctorPageProps = {
